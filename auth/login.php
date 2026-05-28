@@ -33,28 +33,34 @@
           <h1 class="text-3xl text-black google-sans-semibold">Welcome Back</h1>
           <p class="text-neutral-700 text-center">Enter your email and password to access your account</p>
         </div>
-        <div class="w-full space-y-6 my-12">
+        <?php
+        session_start();
+        $login_error = $_SESSION['login_error'] ?? '';
+        unset($_SESSION['login_error']);
+        ?>
+        <?php if ($login_error): ?>
+          <div class="mb-4 w-full max-w-lg mx-auto bg-red-100 text-red-700 rounded-lg px-4 py-2 text-center text-sm"><?php echo htmlspecialchars($login_error); ?></div>
+        <?php endif; ?>
+        <form method="POST" action="process_login.php" accept-charset="UTF-8" class="w-full space-y-6 my-12">
           <div class="grid gap-1">
             <label for="email">Email</label>
             <input
-              class="p-2 rounded-lg border-2 border-transparent outline-1 outline-transparent bg-neutral-50 focus:outline-1 focus:outline-neutral-300 focus:border-2 focus:border-neutral-300/30 transition-all" 
+              class="p-2.5 rounded-xl border border-neutral-200 bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-300"
               type="text"
-              placeholder="Enter your email" 
+              placeholder="Enter your email"
               name="email"
               aria-label="email"
-              required
-            >
+              required>
           </div>
           <div class="grid gap-1">
             <label for="password">Password</label>
             <input
-              class="p-2 rounded-lg border-2 border-transparent outline-1 outline-transparent bg-neutral-50 focus:outline-1 focus:outline-neutral-300 focus:border-2 focus:border-neutral-300/30 transition-all" 
+              class="p-2.5 rounded-xl border border-neutral-200 bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-300"
               type="password"
-              placeholder="Enter your password" 
+              placeholder="Enter your password"
               name="password"
               aria-label="password"
-              required
-            >
+              required>
           </div>
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
@@ -64,7 +70,7 @@
             <a href="#" class="text-black">Forgot Password</a>
           </div>
           <button class="my-6 cursor-pointer hover:bg-neutral-800 hover:shadow transition-all w-full mx-auto bg-black rounded-lg p-3 text-white text-center">Sign In</button>
-        </div>
+        </form>
       </div>
       <div class="flex items-center justify-center">
         <p class="text-neutral-600">Don't have an account? <a href="./register.php" class="text-black">Sign Up</a></p>

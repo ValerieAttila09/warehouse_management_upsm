@@ -38,9 +38,20 @@
           <p class="text-neutral-700 text-center">Create your account with a smooth multi-step registration flow.</p>
         </div>
 
-        <div class="w-full my-6 relative min-h-[620px]">
+        <?php
+        session_start();
+        $register_error = $_SESSION['register_error'] ?? '';
+        $register_success = $_SESSION['register_success'] ?? '';
+        unset($_SESSION['register_error'], $_SESSION['register_success']);
+        ?>
+        <?php if ($register_error): ?>
+          <div class="mb-4 w-full max-w-lg mx-auto bg-red-100 text-red-700 rounded-lg px-4 py-2 text-center text-sm"><?php echo htmlspecialchars($register_error); ?></div>
+        <?php elseif ($register_success): ?>
+          <div class="mb-4 w-full max-w-lg mx-auto bg-green-100 text-green-700 rounded-lg px-4 py-2 text-center text-sm"><?php echo htmlspecialchars($register_success); ?></div>
+        <?php endif; ?>
+        <div class="w-full my-6 relative min-h-[540px]">
           <div id="register-step-1" class="absolute inset-0 bg-white p-6">
-            <form class="h-full flex flex-col justify-between gap-5" id="basic-register-form">
+            <form class="h-full flex flex-col justify-between gap-5" id="basic-register-form" method="POST" action="process_register.php" enctype="multipart/form-data">
               <div class="space-y-4">
                 <div class="flex items-center gap-2">
                   <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-black text-white text-sm">1</span>
