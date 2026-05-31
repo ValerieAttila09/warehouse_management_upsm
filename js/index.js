@@ -23,6 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const last = tr.dataset.lastName || btn.dataset.lastName || '';
       const email = tr.dataset.email || btn.dataset.email || '';
       const role = tr.dataset.role || btn.dataset.role || '';
+      const country = tr.dataset.country || btn.dataset.country || '';
+      const city = tr.dataset.city || btn.dataset.city || '';
+      const phone = tr.dataset.phoneNumber || tr.dataset.phone || btn.dataset.phone || '';
+      const zip = tr.dataset.zipCode || tr.dataset.zip || btn.dataset.zip || '';
+      const profile = tr.dataset.profilePicture || btn.dataset.profilePicture || '';
 
       const form = document.getElementById('edit-user-form');
       if (!form) return;
@@ -33,6 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const f3 = form.querySelector('input[name="email"]'); if (f3) f3.value = email;
       const roleSelect = form.querySelector('select[name="role"]');
       if (roleSelect) roleSelect.value = role;
+      const countryInput = form.querySelector('input[name="country"]'); if (countryInput) countryInput.value = country;
+      const cityInput = form.querySelector('input[name="city"]'); if (cityInput) cityInput.value = city;
+      const phoneInput = form.querySelector('input[name="phone"]'); if (phoneInput) phoneInput.value = phone;
+      const zipInput = form.querySelector('input[name="zip_code"]'); if (zipInput) zipInput.value = zip;
+      const profileInput = form.querySelector('input[name="profile_picture"]'); if (profileInput) profileInput.value = profile;
     });
   });
 

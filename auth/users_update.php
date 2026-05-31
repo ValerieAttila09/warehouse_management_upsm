@@ -33,6 +33,7 @@ $phone = trim($_POST['phone'] ?? '');
 $zip_code = trim($_POST['zip_code'] ?? '');
 $role = $_POST['role'] ?? null;
 $status = isset($_POST['status']) ? (int)$_POST['status'] : null;
+$profile_picture = trim($_POST['profile_picture'] ?? '');
 
 if ($id <= 0) {
   $msg = 'User id tidak valid.';
@@ -98,6 +99,11 @@ if ($status !== null) {
   $fields[] = 'status = ?';
   $types .= 'i';
   $params[] = $status;
+}
+if ($profile_picture !== '') {
+  $fields[] = 'profile_picture = ?';
+  $types .= 's';
+  $params[] = $profile_picture;
 }
 
 if (empty($fields)) {

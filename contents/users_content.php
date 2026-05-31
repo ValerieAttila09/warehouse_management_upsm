@@ -95,146 +95,68 @@
 											<label for="checkbox-all" class="sr-only">checkbox</label>
 										</div>
 									</th>
-									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-										Name
-									</th>
-									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-										Biography
-									</th>
-									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-										Position
-									</th>
-									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-										Country
-									</th>
-									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-										Status
-									</th>
-									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-										Actions
-									</th>
+									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">Name</th>
+									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">Email</th>
+									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">Role</th>
+									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">Phone</th>
+									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">Location</th>
+									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">Zip</th>
+									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">Actions</th>
 								</tr>
 							</thead>
 							<tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-
-								<tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-									<td class="w-4 p-4">
-										<div class="flex items-center">
-											<input id="checkbox-1" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600">
-											<label for="checkbox-1" class="sr-only">checkbox</label>
-										</div>
-									</td>
-									<td class="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
-										<img class="w-10 h-10 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/neil-sims.png" alt="Neil Sims avatar">
-										<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-											<div class="text-base font-semibold text-gray-900 dark:text-white">Neil Sims</div>
-											<div class="text-sm font-normal text-gray-500 dark:text-gray-400">neil.sims@flowbite.com</div>
-										</div>
-									</td>
-									<td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">I love working with React and Flowbites to create efficient and user-friendly interfaces. In my spare time, I enjoys baking, hiking, and spending time with my family.</td>
-									<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Front-end developer</td>
-									<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">United States</td>
-									<td class="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">
-										<div class="flex items-center">
-											<div class="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div> Active
-										</div>
-									</td>
-									<td class="p-4 space-x-2 whitespace-nowrap">
-										<button type="button" data-modal-target="edit-user-modal" data-modal-toggle="edit-user-modal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-											<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-												<path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
-												<path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path>
-											</svg>
-											Edit user
-										</button>
-										<button type="button" data-modal-target="delete-user-modal" data-modal-toggle="delete-user-modal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
-											<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-												<path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-											</svg>
-											Delete user
-										</button>
-									</td>
-								</tr>
-
-								<tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-									<td class="w-4 p-4">
-										<div class="flex items-center">
-											<input id="checkbox-2" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600">
-											<label for="checkbox-2" class="sr-only">checkbox</label>
-										</div>
-									</td>
-									<td class="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
-										<img class="w-10 h-10 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/roberta-casas.png" alt="Roberta Casas avatar">
-										<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-											<div class="text-base font-semibold text-gray-900 dark:text-white">Roberta Casas</div>
-											<div class="text-sm font-normal text-gray-500 dark:text-gray-400">roberta.casas@flowbite.com</div>
-										</div>
-									</td>
-									<td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">I love working with React and Flowbites to create efficient and user-friendly interfaces. In my spare time, I enjoys baking, hiking, and spending time with my family.</td>
-									<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Designer</td>
-									<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Spain</td>
-									<td class="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">
-										<div class="flex items-center">
-											<div class="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div> Active
-										</div>
-									</td>
-									<td class="p-4 space-x-2 whitespace-nowrap">
-										<button type="button" data-modal-target="edit-user-modal" data-modal-toggle="edit-user-modal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-											<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-												<path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
-												<path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path>
-											</svg>
-											Edit user
-										</button>
-										<button type="button" data-modal-target="delete-user-modal" data-modal-toggle="delete-user-modal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
-											<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-												<path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-											</svg>
-											Delete user
-										</button>
-									</td>
-								</tr>
-
-								<tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-									<td class="w-4 p-4">
-										<div class="flex items-center">
-											<input id="checkbox-3" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600">
-											<label for="checkbox-3" class="sr-only">checkbox</label>
-										</div>
-									</td>
-									<td class="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
-										<img class="w-10 h-10 rounded-full" src="https://flowbite-admin-dashboard.vercel.app/images/users/michael-gough.png" alt="Michael Gough avatar">
-										<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-											<div class="text-base font-semibold text-gray-900 dark:text-white">Michael Gough</div>
-											<div class="text-sm font-normal text-gray-500 dark:text-gray-400">michael.gough@flowbite.com</div>
-										</div>
-									</td>
-									<td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">I love working with React and Flowbites to create efficient and user-friendly interfaces. In my spare time, I enjoys baking, hiking, and spending time with my family.</td>
-									<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">React developer</td>
-									<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">United Kingdom</td>
-									<td class="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">
-										<div class="flex items-center">
-											<div class="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div> Active
-										</div>
-									</td>
-									<td class="p-4 space-x-2 whitespace-nowrap">
-										<button type="button" data-modal-target="edit-user-modal" data-modal-toggle="edit-user-modal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-											<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-												<path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
-												<path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path>
-											</svg>
-											Edit user
-										</button>
-										<button type="button" data-modal-target="delete-user-modal" data-modal-toggle="delete-user-modal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
-											<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-												<path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-											</svg>
-											Delete user
-										</button>
-									</td>
-								</tr>
-
-
+								<?php
+								require_once __DIR__ . '/../config/koneksi.php';
+								$sql = "SELECT id_user, first_name, last_name, email, country, city, phone_number, role, zip_code, profile_picture, status FROM tb_user ORDER BY id_user DESC";
+								$res = mysqli_query($koneksi, $sql);
+								if ($res) {
+									while ($row = mysqli_fetch_assoc($res)) {
+										$id = htmlspecialchars($row['id_user']);
+										$first = htmlspecialchars($row['first_name']);
+										$last = htmlspecialchars($row['last_name']);
+										$email = htmlspecialchars($row['email']);
+										$role = htmlspecialchars($row['role']);
+										$phone = htmlspecialchars($row['phone_number']);
+										$country = htmlspecialchars($row['country']);
+										$city = htmlspecialchars($row['city']);
+										$zip = htmlspecialchars($row['zip_code']);
+										$profile = htmlspecialchars($row['profile_picture'] ?: 'https://flowbite-admin-dashboard.vercel.app/images/users/default.png');
+										$name = trim($first . ' ' . $last);
+										$location = trim($city . ($city && $country ? ', ' : '') . $country);
+										// output row with data-* attributes used by JS
+								?>
+										<tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-user-id="<?= $id ?>" data-first-name="<?= $first ?>" data-last-name="<?= $last ?>" data-email="<?= $email ?>" data-role="<?= $role ?>" data-phone-number="<?= $phone ?>" data-country="<?= $country ?>" data-city="<?= $city ?>" data-zip-code="<?= $zip ?>">
+											<td class="w-4 p-4">
+												<div class="flex items-center"><input type="checkbox" class="w-4 h-4 border-gray-300 rounded bg-gray-50" /><label class="sr-only">checkbox</label></div>
+											</td>
+											<td class="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
+												<img class="w-10 h-10 rounded-full" src="../uploads/<?= $profile ?>" alt="<?= $name ?> avatar">
+												<div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+													<div class="text-base font-semibold text-gray-900 dark:text-white"><?= $name ?></div>
+													<div class="text-sm font-normal text-gray-500 dark:text-gray-400"><?= $email ?></div>
+												</div>
+											</td>
+											<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><?= $email ?></td>
+											<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><?= $role ?></td>
+											<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><?= $phone ?></td>
+											<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><?= $location ?></td>
+											<td class="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white"><?= $zip ?></td>
+											<td class="p-4 space-x-2 whitespace-nowrap">
+												<button type="button" data-modal-target="edit-user-modal" data-modal-toggle="edit-user-modal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+													<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+														<path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
+														<path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path>
+													</svg> Edit user</button>
+												<button type="button" data-modal-target="delete-user-modal" data-modal-toggle="delete-user-modal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+													<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+														<path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+													</svg> Delete user</button>
+											</td>
+										</tr>
+								<?php
+									}
+								}
+								?>
 							</tbody>
 						</table>
 					</div>
@@ -315,10 +237,28 @@
 									<label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">New Password (leave empty to keep)</label>
 									<input type="password" name="password" value="" id="edit-password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="New password">
 								</div>
-								<div class="col-span-6">
-									<label for="biography" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Biography</label>
-									<textarea id="edit-biography" name="biography" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Biography"></textarea>
+
+								<div class="col-span-6 sm:col-span-3">
+									<label for="edit-country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
+									<input type="text" name="country" id="edit-country" value="" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" placeholder="Country">
 								</div>
+								<div class="col-span-6 sm:col-span-3">
+									<label for="edit-city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City</label>
+									<input type="text" name="city" id="edit-city" value="" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" placeholder="City">
+								</div>
+								<div class="col-span-6 sm:col-span-3">
+									<label for="edit-phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone</label>
+									<input type="text" name="phone" id="edit-phone" value="" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" placeholder="Phone number">
+								</div>
+								<div class="col-span-6 sm:col-span-3">
+									<label for="edit-zip" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Zip Code</label>
+									<input type="text" name="zip_code" id="edit-zip" value="" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" placeholder="Zip code">
+								</div>
+								<div class="col-span-6 sm:col-span-6">
+									<label for="edit-profile" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Profile image URL</label>
+									<input type="text" name="profile_picture" id="edit-profile" value="" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" placeholder="https://example.com/avatar.jpg">
+								</div>
+								<!-- removed biography field to match tb_user columns -->
 							</div>
 						</form>
 					</div>
@@ -368,8 +308,24 @@
 									<input type="password" name="password" id="add-password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Password" required>
 								</div>
 								<div class="col-span-6 sm:col-span-3">
-									<label for="position" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Position</label>
-									<input type="text" name="position" id="add-position" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Position">
+									<label for="add-country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
+									<input type="text" name="country" id="add-country" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" placeholder="Country">
+								</div>
+								<div class="col-span-6 sm:col-span-3">
+									<label for="add-city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City</label>
+									<input type="text" name="city" id="add-city" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" placeholder="City">
+								</div>
+								<div class="col-span-6 sm:col-span-3">
+									<label for="add-phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone</label>
+									<input type="text" name="phone" id="add-phone" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" placeholder="Phone number">
+								</div>
+								<div class="col-span-6 sm:col-span-3">
+									<label for="add-zip" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Zip Code</label>
+									<input type="text" name="zip_code" id="add-zip" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" placeholder="Zip code">
+								</div>
+								<div class="col-span-6 sm:col-span-6">
+									<label for="add-profile" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Profile image URL</label>
+									<input type="text" name="profile_picture" id="add-profile" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" placeholder="https://example.com/avatar.jpg">
 								</div>
 								<div class="col-span-6 sm:col-span-3">
 									<label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
@@ -378,10 +334,7 @@
 										<option value="admin">Admin</option>
 									</select>
 								</div>
-								<div class="col-span-6">
-									<label for="biography" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Biography</label>
-									<textarea id="add-biography" name="biography" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Biography"></textarea>
-								</div>
+								<!-- removed biography field to match tb_user columns -->
 							</div>
 							<input type="hidden" name="status" value="1">
 						</form>

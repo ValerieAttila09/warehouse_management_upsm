@@ -31,6 +31,7 @@ $country = trim($_POST['country'] ?? '');
 $city = trim($_POST['city'] ?? '');
 $phone = trim($_POST['phone'] ?? '');
 $zip_code = trim($_POST['zip_code'] ?? '');
+$profile_picture = trim($_POST['profile_picture'] ?? '');
 $role = $_POST['role'] ?? 'staff';
 $status = isset($_POST['status']) ? (int)$_POST['status'] : 1;
 
@@ -59,7 +60,6 @@ if (!$stmt) {
   exit;
 }
 
-$profile_picture = '';
 $stmt->bind_param('ssssssssssi', $first_name, $last_name, $email, $hashed, $country, $city, $phone, $zip_code, $profile_picture, $role, $status);
 
 if ($stmt->execute()) {
