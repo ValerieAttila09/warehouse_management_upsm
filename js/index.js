@@ -43,6 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const phoneInput = form.querySelector('input[name="phone"]'); if (phoneInput) phoneInput.value = phone;
       const zipInput = form.querySelector('input[name="zip_code"]'); if (zipInput) zipInput.value = zip;
       const profileInput = form.querySelector('input[name="profile_picture"]'); if (profileInput) profileInput.value = profile;
+      
+      console.log('Edit form populated with id:', id);
     });
   });
 
@@ -74,6 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
           info.textContent = name ? name.textContent.trim() : '';
         }
       }
+      
+      console.log('Delete user selected - id:', selectedDeleteUserId, 'email:', selectedDeleteUserEmail);
     });
   });
 
@@ -134,14 +138,44 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const url = f.action;
       const data = Object.fromEntries(new FormData(f).entries());
-      ajaxPost(url, data).then(r => r.json()).then(json => {
-        if (json.success) {
-          alert(json.message || 'Sukses');
-          window.location.reload();
-        } else {
-          alert(json.message || 'Gagal');
-        }
-      }).catch(() => alert('Network error'));
+      
+      function submitForm() {
+        return ajaxPost(url, data);
+      }
+      
+      submitForm()
+        .then(r => {
+          if (r.status === 403) {
+            // admin confirmation required: prompt for password then retry
+            const pwd = prompt('Masukkan password admin untuk konfirmasi:');
+            if (!pwd) return Promise.resolve(null);
+            return ajaxPost('../auth/admin_confirm.php', { admin_password: pwd })
+              .then(confirmResp => confirmResp.json())
+              .then(confirmJson => {
+                if (confirmJson.success) {
+                  return submitForm();
+                } else {
+                  alert(confirmJson.message || 'Konfirmasi gagal');
+                  return Promise.resolve(null);
+                }
+              });
+          }
+          return r;
+        })
+        .then(r => {
+          if (!r) return;
+          return r.json();
+        })
+        .then(json => {
+          if (!json) return;
+          if (json.success) {
+            alert(json.message || 'Sukses');
+            window.location.reload();
+          } else {
+            alert(json.message || 'Gagal');
+          }
+        })
+        .catch(() => alert('Network error'));
     });
   });
 

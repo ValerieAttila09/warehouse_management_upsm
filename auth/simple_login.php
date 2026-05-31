@@ -27,6 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user_id'] = $id_user;
         $_SESSION['email'] = $db_email;
         $_SESSION['role'] = $role;
+
+        if ($role === 'admin') {
+          $_SESSION['admin_confirmed_at'] = time();
+        }
+
         header('Location: ../pages/dashboard.php');
         exit;
       } else {

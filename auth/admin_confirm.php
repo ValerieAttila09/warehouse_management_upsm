@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__ . '/acl.php';
 
-// Only logged in admins should reach here
-require_role('admin');
+// Only logged in users should reach here
+require_login();
 
 $message = '';
 $return = $_GET['return'] ?? ($_POST['return'] ?? '../pages/users.php');
