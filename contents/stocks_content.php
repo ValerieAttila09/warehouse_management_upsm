@@ -1,9 +1,6 @@
-<?php
-include "../config/koneksi.php";
-?>
-
 <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
 	<main>
+
 		<div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
 			<div class="w-full mb-1">
 				<div class="mb-4">
@@ -22,7 +19,7 @@ include "../config/koneksi.php";
 									<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 										<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
 									</svg>
-									<a href="#" class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">E-commerce</a>
+									<a href="#" class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Products</a>
 								</div>
 							</li>
 							<li>
@@ -30,49 +27,49 @@ include "../config/koneksi.php";
 									<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 										<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
 									</svg>
-									<span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Products</span>
+									<span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">List</span>
 								</div>
 							</li>
 						</ol>
 					</nav>
-					<h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All products</h1>
+					<h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All Products</h1>
 				</div>
-				<div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
-					<div class="flex items-center mb-4 sm:mb-0">
-						<form class="sm:pr-3" action="#" method="GET">
+				<div class="sm:flex">
+					<div class="items-center hidden mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700">
+						<form class="lg:pr-3" action="#" method="GET">
 							<label for="products-search" class="sr-only">Search</label>
-							<div class="relative w-48 mt-1 sm:w-64 xl:w-96">
-								<input type="text" name="email" id="products-search" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search for products">
+							<div class="relative mt-1 lg:w-64 xl:w-96">
+								<input type="text" name="search" id="products-search" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search products by name or SKU">
 							</div>
 						</form>
-						<div class="flex items-center w-full sm:justify-end">
-							<div class="flex pl-2 space-x-1">
-								<a href="#" class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-									<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-										<path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
-									</svg>
-								</a>
-								<a href="#" class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-									<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-										<path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-									</svg>
-								</a>
-								<a href="#" class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-									<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-										<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-									</svg>
-								</a>
-								<a href="#" class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-									<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-										<path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-									</svg>
-								</a>
+						<?php if ($_SESSION['role'] === 'admin'): ?>
+							<div class="pl-0 mt-3 sm:pl-2 sm:mt-0">
+								<label for="filter-user" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Filter by User:</label>
+								<select id="filter-user" name="owner_user_id" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+									<option value="">All Users</option>
+									<?php
+									require_once __DIR__ . '/../config/koneksi.php';
+									$user_sql = "SELECT id_user, first_name, last_name FROM tb_user WHERE status = 1 ORDER BY first_name ASC";
+									$user_res = mysqli_query($koneksi, $user_sql);
+									if ($user_res) {
+										while ($user_row = mysqli_fetch_assoc($user_res)) {
+											$user_id = htmlspecialchars($user_row['id_user']);
+											$user_name = htmlspecialchars($user_row['first_name'] . ' ' . $user_row['last_name']);
+											echo '<option value="' . $user_id . '">' . $user_name . '</option>';
+										}
+									}
+									?>
+								</select>
 							</div>
-						</div>
+						<?php endif; ?>
+						<button
+							data-modal-target="add-product-modal"
+							data-modal-toggle="add-product-modal"
+							class="text-white bg-blue-600 hover:bg-blue-700 rounded-lg px-5 py-2.5">
+
+							+ Add Product
+						</button>
 					</div>
-					<button id="createProductButton" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800" type="button" data-drawer-target="drawer-create-product-default" data-drawer-show="drawer-create-product-default" aria-controls="drawer-create-product-default" data-drawer-placement="right">
-						Add new product
-					</button>
 				</div>
 			</div>
 		</div>
@@ -84,79 +81,261 @@ include "../config/koneksi.php";
 						<table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
 							<thead class="bg-gray-100 dark:bg-gray-700">
 								<tr>
-									<th scope="col" class="p-4">
-										<div class="flex items-center">
-											<input id="checkbox-all" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600">
-											<label for="checkbox-all" class="sr-only">checkbox</label>
-										</div>
-									</th>
-									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-										Nama Produk
-									</th>
-									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-										SKU
-									</th>
-									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-										Harga
-									</th>
-									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-										Kategori
-									</th>
-									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-										Stok
-									</th>
-									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-										Deskripsi
-									</th>
-									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-										Aksi
-									</th>
+									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">No</th>
+									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">Product Name</th>
+									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">SKU</th>
+									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">Owner</th>
+									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">Category</th>
+									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">Price</th>
+									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">Stock</th>
+									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">Created</th>
+									<th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">Actions</th>
 								</tr>
 							</thead>
-							<?php
-							$stok_query = "SELECT * FROM tb_produk";
-							$get_all_stok = mysqli_query($koneksi, $stok_query);
-							?>
 							<tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
 								<?php
-								while ($fetch_stok = mysqli_fetch_assoc($get_all_stok)) {
+								$filter_user = isset($_GET['owner_user_id']) && $_GET['owner_user_id'] !== '' ? (int)$_GET['owner_user_id'] : null;
+								$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+
+								$current_user_id = (int) $_SESSION['user_id'];
+
+								$sql = "SELECT
+												    p.id_produk,
+												    p.owner_user_id,
+												    p.sku,
+												    p.nama,
+												    p.harga,
+												    p.id_kategori,
+												    p.deskripsi,
+												    p.stok,
+												    p.created_at,
+
+												    u.first_name,
+												    u.last_name,
+
+												    k.nama_kategori
+
+												FROM tb_produk p
+
+												LEFT JOIN tb_user u
+												    ON p.owner_user_id = u.id_user
+
+												LEFT JOIN tb_kategori_produk k
+												    ON p.id_kategori = k.id_kategori
+
+												WHERE p.owner_user_id = $current_user_id
+
+												ORDER BY p.created_at DESC
+												";
+
+								$res = mysqli_query($koneksi, $sql);
+								$no = 1;
+								if ($res && mysqli_num_rows($res) > 0) {
+									while ($row = mysqli_fetch_assoc($res)) {
+										$id = htmlspecialchars($row['id_produk']);
+										$sku = htmlspecialchars($row['sku']);
+										$nama = htmlspecialchars($row['nama']);
+										$harga = number_format($row['harga'], 0, ',', '.');
+										$kategori = htmlspecialchars($row['nama_kategori']);
+										$stok = $row['stok'];
+										$owner_name = htmlspecialchars(($row['first_name'] ?? '') . ' ' . ($row['last_name'] ?? ''));
+										$created = date('d M Y', strtotime($row['created_at'] ?? 'now'));
+										$deskripsi = htmlspecialchars($row['deskripsi'] ?? '');
 								?>
-									<tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-										<td class="w-4 p-4">
-											<div class="flex items-center">
-												<input id="checkbox-194556" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600">
-												<label for="checkbox-194556" class="sr-only">checkbox</label>
-											</div>
-										</td>
-										<td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
-											<div class="text-base font-semibold text-gray-900 dark:text-white"><?= $fetch_stok['nama'] ?></div>
-											<div class="text-sm font-normal text-gray-500 dark:text-gray-400">dummy text</div>
-										</td>
-										<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><?= $fetch_stok['sku'] ?></td>
-										<td class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400"><?= $fetch_stok['harga'] ?></td>
-										<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><?= $fetch_stok['kategori'] ?></td>
-										<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><?= $fetch_stok['stok'] ?></td>
-										<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><?= $fetch_stok['deskripsi'] ?></td>
-										<td class="p-4 space-x-2 whitespace-nowrap">
-											<button type="button" id="updateProductButton" data-drawer-target="drawer-update-product-default" data-drawer-show="drawer-update-product-default" aria-controls="drawer-update-product-default" data-drawer-placement="right" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-												<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-													<path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
-													<path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path>
-												</svg>
-												Update
-											</button>
-											<button type="button" id="deleteProductButton" data-drawer-target="drawer-delete-product-default" data-drawer-show="drawer-delete-product-default" aria-controls="drawer-delete-product-default" data-drawer-placement="right" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
-												<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-													<path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-												</svg>
-												Delete item
-											</button>
-										</td>
-									</tr>
+										<tr class="hover:bg-gray-100 dark:hover:bg-gray-700" data-product-id="<?= $id ?>" data-product-name="<?= $nama ?>" data-product-sku="<?= $sku ?>" data-product-owner="<?= htmlspecialchars($row['owner_user_id']) ?>">
+											<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><?php echo $no++ ?></td>
+											<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><?= $nama ?></td>
+											<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"><?= $sku ?></td>
+											<td class="p-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"><?= $owner_name ?: 'Unknown' ?></td>
+											<td class="p-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"><?= $kategori ?></td>
+											<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">Rp<?= $harga ?></td>
+											<td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+												<?php if ($stok > 0): ?>
+													<span class="text-green-600 font-semibold"><?= $stok ?></span>
+												<?php else: ?>
+													<span class="text-red-600 font-semibold">Out of Stock</span>
+												<?php endif; ?>
+											</td>
+											<td class="p-4 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"><?= $created ?></td>
+											<td class="p-4 space-x-2 whitespace-nowrap flex items-center gap-3">
+												<button type="button" data-modal-target="view-product-modal" data-modal-toggle="view-product-modal" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" data-product-deskripsi="<?= $deskripsi ?>">
+													<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+														<path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+														<path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
+													</svg> View
+												</button>
+
+												<!-- Update modal toggle -->
+												<button data-modal-target="update-modal-<?= $id ?>" data-modal-toggle="update-modal-<?= $id ?>" class="text-white flex items-center gap-2 bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none" type="button">
+													<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+														<path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+													</svg>
+													<span class="">Edit</span>
+												</button>
+
+												<!-- Update Modal -->
+												<div id="update-modal-<?= $id ?>" tabindex="-1" aria-hidden="true" class="rounded-lg fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full">
+													<div class="relative p-4 w-full max-w-2xl max-h-full">
+														<!-- Modal content -->
+														<div class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
+															<!-- Modal header -->
+															<div class="flex items-center justify-between border-b border-default pb-4 md:pb-5">
+																<h3 class="text-white text-lg font-medium text-heading">
+																	<?= $nama ?>
+																</h3>
+																<button type="button" class="text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center" data-modal-hide="update-modal-<?= $id ?>">
+																	<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+																		<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
+																	</svg>
+																	<span class="sr-only">Close modal</span>
+																</button>
+															</div>
+															<!-- Modal body -->
+															<form action="../actions/update_product.php" method="POST" class="space-y-4 py-4">
+
+																<input type="hidden" name="id_produk" value="<?= $id ?>">
+
+																<div>
+																	<label class="block mb-2 text-sm font-medium text-white">
+																		Product Name
+																	</label>
+
+																	<input
+																		type="text"
+																		name="nama"
+																		value="<?= $nama ?>"
+																		class="w-full rounded-lg border border-gray-600 bg-gray-700 text-white p-2.5"
+																		required>
+																</div>
+
+																<div>
+																	<label class="block mb-2 text-sm font-medium text-white">
+																		SKU
+																	</label>
+
+																	<input
+																		type="text"
+																		name="sku"
+																		value="<?= $sku ?>"
+																		class="w-full rounded-lg border border-gray-600 bg-gray-700 text-white p-2.5"
+																		required>
+																</div>
+
+																<div>
+																	<label class="block mb-2 text-sm font-medium text-white">
+																		Category
+																	</label>
+
+																	<select
+																		name="id_kategori"
+																		class="w-full rounded-lg border border-gray-600 bg-gray-700 text-white p-2.5">
+
+																		<?php
+																		$kategori_sql = mysqli_query(
+																			$koneksi,
+																			"SELECT * FROM tb_kategori_produk ORDER BY nama_kategori ASC"
+																		);
+
+																		while ($kat = mysqli_fetch_assoc($kategori_sql)):
+																		?>
+																			<option
+																				value="<?= $kat['id_kategori'] ?>"
+																				<?= $kat['id_kategori'] == $row['id_kategori'] ? 'selected' : '' ?>>
+																				<?= htmlspecialchars($kat['nama_kategori']) ?>
+																			</option>
+																		<?php endwhile; ?>
+																	</select>
+																</div>
+
+																<div>
+																	<label class="block mb-2 text-sm font-medium text-white">
+																		Price
+																	</label>
+
+																	<input
+																		type="number"
+																		name="harga"
+																		value="<?= $row['harga'] ?>"
+																		class="w-full rounded-lg border border-gray-600 bg-gray-700 text-white p-2.5"
+																		required>
+																</div>
+
+																<div>
+																	<label class="block mb-2 text-sm font-medium text-white">
+																		Stock
+																	</label>
+
+																	<input
+																		type="number"
+																		name="stok"
+																		value="<?= $stok ?>"
+																		class="w-full rounded-lg border border-gray-600 bg-gray-700 text-white p-2.5"
+																		required>
+																</div>
+
+																<div>
+																	<label class="block mb-2 text-sm font-medium text-white">
+																		Description
+																	</label>
+
+																	<textarea
+																		name="deskripsi"
+																		rows="4"
+																		class="w-full rounded-lg border border-gray-600 bg-gray-700 text-white p-2.5"><?= htmlspecialchars($row['deskripsi']) ?></textarea>
+																</div>
+
+																<div class="flex justify-end gap-3 border-t border-gray-700 pt-4">
+
+																	<button
+																		type="button"
+																		data-modal-hide="update-modal-<?= $id ?>"
+																		class="px-4 py-2 rounded-lg bg-gray-600 text-white">
+																		Cancel
+																	</button>
+
+																	<button
+																		type="submit"
+																		class="px-4 py-2 rounded-lg bg-blue-600 text-white">
+																		Update Product
+																	</button>
+
+																</div>
+
+															</form>
+															<!-- Modal footer -->
+															<div class="flex items-center border-t border-default space-x-4 pt-4 md:pt-5">
+																<button data-modal-hide="update-modal-<?= $id ?>" type="button" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">I accept</button>
+																<button data-modal-hide="update-modal-<?= $id ?>" type="button" class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Decline</button>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<form
+													action="../actions/delete_product.php"
+													method="POST"
+													onsubmit="return confirm('Yakin ingin menghapus produk ini?');">
+
+													<input
+														type="hidden"
+														name="id_produk"
+														value="<?= $id ?>">
+
+													<button
+														type="submit"
+														class="text-white bg-red-600 hover:bg-red-700 rounded-lg px-3 py-2">
+														Delete
+													</button>
+
+												</form>
+											</td>
+										</tr>
 								<?php
+									}
+								} else {
+									echo '<tr><td colspan="8" class="p-4 text-center text-gray-500 dark:text-gray-400">No products found</td></tr>';
 								}
 								?>
-
 							</tbody>
 						</table>
 					</div>
@@ -164,181 +343,204 @@ include "../config/koneksi.php";
 			</div>
 		</div>
 
-		<div class="sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
-			<div class="flex items-center mb-4 sm:mb-0">
-				<a href="#" class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-					<svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-						<path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-					</svg>
-				</a>
-				<a href="#" class="inline-flex justify-center p-1 mr-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-					<svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-						<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-					</svg>
-				</a>
-				<span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">1-20</span> of <span class="font-semibold text-gray-900 dark:text-white">2290</span></span>
-			</div>
-			<div class="flex items-center space-x-3">
-				<a href="#" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-					<svg class="w-5 h-5 mr-1 -ml-1" "="" fill=" currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-						<path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-					</svg>
-					Previous
-				</a>
-				<a href="#" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-					Next
-					<svg class="w-5 h-5 ml-1 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-						<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-					</svg>
-				</a>
-			</div>
-		</div>
-
-		<!-- Edit Product Drawer -->
-		<div id="drawer-update-product-default" class="fixed top-0 right-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform translate-x-full bg-white dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
-			<h5 id="drawer-label" class="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">Update Product</h5>
-			<button type="button" data-drawer-dismiss="drawer-update-product-default" aria-controls="drawer-update-product-default" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
-				<svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-					<path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-				</svg>
-				<span class="sr-only">Close menu</span>
-			</button>
-			<form action="#">
-				<div class="space-y-4">
-					<div>
-						<label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-						<input type="text" name="title" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="Education Dashboard" placeholder="Type product name" required="">
-					</div>
-					<div>
-						<label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Technology</label>
-						<select id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-							<option selected="">Flowbite</option>
-							<option value="RE">React</option>
-							<option value="AN">Angular</option>
-							<option value="VU">Vue JS</option>
-						</select>
-					</div>
-					<div>
-						<label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-						<input type="number" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="2999" placeholder="$149" required="">
-					</div>
-					<div>
-						<label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-						<textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Enter event description here">Start developing with an open-source library of over 450+ UI components, sections, and pages built with the utility classes from Tailwind CSS and designed in Figma.</textarea>
-					</div>
-					<div>
-						<label for="discount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Discount</label>
-						<select id="discount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-							<option selected="">No</option>
-							<option value="5">5%</option>
-							<option value="10">10%</option>
-							<option value="20">20%</option>
-							<option value="30">30%</option>
-							<option value="40">40%</option>
-							<option value="50">50%</option>
-						</select>
-					</div>
-				</div>
-				<div class="bottom-0 left-0 flex justify-center w-full pb-4 mt-4 space-x-4 sm:absolute sm:px-4 sm:mt-0">
-					<button type="submit" class="w-full justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-						Update
-					</button>
-					<button type="button" class="w-full justify-center text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-						<svg aria-hidden="true" class="w-5 h-5 mr-1 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-							<path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-						</svg>
-						Delete
-					</button>
-				</div>
-			</form>
-		</div>
-
-
-		<!-- Delete Product Drawer -->
-		<div id="drawer-delete-product-default" class="fixed top-0 right-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform translate-x-full bg-white dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
-			<h5 id="drawer-label" class="inline-flex items-center text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">Delete item</h5>
-			<button type="button" data-drawer-dismiss="drawer-delete-product-default" aria-controls="drawer-delete-product-default" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
-				<svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-					<path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-				</svg>
-				<span class="sr-only">Close menu</span>
-			</button>
-			<svg class="w-10 h-10 mt-8 mb-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-			</svg>
-			<h3 class="mb-6 text-lg text-gray-500 dark:text-gray-400">Are you sure you want to delete this product?</h3>
-			<a href="#" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2.5 text-center mr-2 dark:focus:ring-red-900">
-				Yes, I'm sure
-			</a>
-			<a href="#" class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 border border-gray-200 font-medium inline-flex items-center rounded-lg text-sm px-3 py-2.5 text-center dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700" data-drawer-hide="drawer-delete-product-default">
-				No, cancel
-			</a>
-		</div>
-
-
-		<!-- Add Product Drawer -->
-		<div id="drawer-create-product-default" class="fixed top-0 right-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform translate-x-full bg-white dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-label" aria-hidden="true">
-			<h5 id="drawer-label" class="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400">New Product</h5>
-			<button type="button" data-drawer-dismiss="drawer-create-product-default" aria-controls="drawer-create-product-default" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
-				<svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-					<path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-				</svg>
-				<span class="sr-only">Close menu</span>
-			</button>
-			<form action="#">
-				<div class="space-y-4">
-					<div>
-						<label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-						<input type="text" name="title" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
-					</div>
-
-					<div>
-						<label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-						<input type="number" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999" required="">
-					</div>
-					<div>
-						<label for="category-create" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Technology</label>
-						<select id="category-create" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-							<option selected="">Select category</option>
-							<option value="FL">Flowbite</option>
-							<option value="RE">React</option>
-							<option value="AN">Angular</option>
-							<option value="VU">Vue</option>
-						</select>
-					</div>
-					<div>
-						<label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-						<textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Enter event description here"></textarea>
-					</div>
-					<div>
-						<label for="discount-create" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Discount</label>
-						<select id="discount-create" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-							<option selected="">No</option>
-							<option value="5">5%</option>
-							<option value="10">10%</option>
-							<option value="20">20%</option>
-							<option value="30">30%</option>
-							<option value="40">40%</option>
-							<option value="50">50%</option>
-						</select>
-					</div>
-					<div class="bottom-0 left-0 flex justify-center w-full pb-4 space-x-4 md:px-4 md:absolute">
-						<button type="submit" class="text-white w-full justify-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-							Add product
-						</button>
-						<button type="button" data-drawer-dismiss="drawer-create-product-default" aria-controls="drawer-create-product-default" class="inline-flex w-full justify-center text-gray-500 items-center bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-							<svg aria-hidden="true" class="w-5 h-5 -ml-1 sm:mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-							</svg>
-							Cancel
-						</button>
-					</div>
-
-				</div>
-			</form>
-
-
-		</div>
 	</main>
-
 </div>
+
+<!-- View Product Modal -->
+<div class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full" id="view-product-modal">
+	<div class="relative w-full h-full max-w-2xl px-4 md:h-auto">
+		<!-- Modal content -->
+		<div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+			<!-- Modal header -->
+			<div class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
+				<h3 class="text-xl font-semibold dark:text-white">Product Details</h3>
+				<button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-modal-toggle="view-product-modal">
+					<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+					</svg>
+				</button>
+			</div>
+			<!-- Modal body -->
+			<div class="p-6 space-y-6">
+				<div id="product-details-content">
+					<!-- Content will be populated by JS -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="add-product-modal"
+	tabindex="-1"
+	aria-hidden="true"
+	class="hidden fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+
+	<div class="relative w-full max-w-2xl h-full md:h-auto">
+
+		<div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+
+			<div class="flex justify-between items-center p-5 border-b dark:border-gray-700">
+
+				<h3 class="text-xl font-semibold text-white">
+					Add Product
+				</h3>
+
+				<button
+					type="button"
+					data-modal-hide="add-product-modal">
+					✕
+				</button>
+
+			</div>
+
+			<form action="../actions/create_product.php" method="POST">
+
+				<div class="p-6 space-y-4">
+
+					<div>
+						<label>SKU</label>
+
+						<input
+							type="text"
+							name="sku"
+							class="w-full border rounded-lg p-2"
+							required>
+					</div>
+
+					<div>
+						<label>Product Name</label>
+
+						<input
+							type="text"
+							name="nama"
+							class="w-full border rounded-lg p-2"
+							required>
+					</div>
+
+					<div>
+						<label>Category</label>
+
+						<select
+							name="id_kategori"
+							class="w-full border rounded-lg p-2"
+							required>
+
+							<?php
+							$kategori = mysqli_query(
+								$koneksi,
+								"SELECT * FROM tb_kategori_produk ORDER BY nama_kategori ASC"
+							);
+
+							while ($kat = mysqli_fetch_assoc($kategori)):
+							?>
+
+								<option value="<?= $kat['id_kategori'] ?>">
+									<?= htmlspecialchars($kat['nama_kategori']) ?>
+								</option>
+
+							<?php endwhile; ?>
+
+						</select>
+					</div>
+
+					<div>
+						<label>Price</label>
+
+						<input
+							type="number"
+							name="harga"
+							class="w-full border rounded-lg p-2"
+							required>
+					</div>
+
+					<div>
+						<label>Stock</label>
+
+						<input
+							type="number"
+							name="stok"
+							class="w-full border rounded-lg p-2"
+							required>
+					</div>
+
+					<div>
+						<label>Description</label>
+
+						<textarea
+							name="deskripsi"
+							rows="4"
+							class="w-full border rounded-lg p-2"></textarea>
+					</div>
+
+				</div>
+
+				<div class="flex justify-end gap-2 p-5 border-t dark:border-gray-700">
+
+					<button
+						type="button"
+						data-modal-hide="add-product-modal"
+						class="px-4 py-2 bg-gray-500 text-white rounded-lg">
+						Cancel
+					</button>
+
+					<button
+						type="submit"
+						class="px-4 py-2 bg-blue-600 text-white rounded-lg">
+						Save Product
+					</button>
+
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		// Handle filter change
+		document.getElementById('filter-user')?.addEventListener('change', (e) => {
+			const userId = e.target.value;
+			const url = new URL(window.location);
+			if (userId) {
+				url.searchParams.set('owner_user_id', userId);
+			} else {
+				url.searchParams.delete('owner_user_id');
+			}
+			window.location = url.toString();
+		});
+
+		// Handle view product button
+		document.querySelectorAll('[data-modal-target="view-product-modal"]').forEach(btn => {
+			btn.addEventListener('click', (e) => {
+				const tr = btn.closest('tr');
+				if (!tr) return;
+
+				const nama = tr.dataset.productName || '';
+				const sku = tr.dataset.productSku || '';
+				const owner = tr.dataset.productOwner || '';
+				const deskripsi = btn.dataset.productDeskripsi || 'No description available';
+
+				const content = document.getElementById('product-details-content');
+				if (content) {
+					content.innerHTML = `
+					<div class="grid grid-cols-1 gap-4">
+						<div>
+							<label class="block text-sm font-medium text-gray-900 dark:text-white">Product Name</label>
+							<p class="text-gray-700 dark:text-gray-300">${nama}</p>
+						</div>
+						<div>
+							<label class="block text-sm font-medium text-gray-900 dark:text-white">SKU</label>
+							<p class="text-gray-700 dark:text-gray-300">${sku}</p>
+						</div>
+						<div>
+							<label class="block text-sm font-medium text-gray-900 dark:text-white">Description</label>
+							<p class="text-gray-700 dark:text-gray-300">${deskripsi}</p>
+						</div>
+					</div>
+				`;
+				}
+			});
+		});
+	});
+</script>
