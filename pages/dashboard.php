@@ -1,10 +1,7 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['user_id'])) {
-	header('Location: ../auth/simple_login.php');
-	exit;
-}
+require_once dirname(__DIR__) . '/auth/acl.php';
+// dashboard available to both staff and admin
+require_role(['staff', 'admin']);
 ?>
 <!doctype html>
 <html lang="en" class="dark">

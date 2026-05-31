@@ -1,3 +1,8 @@
+<?php
+require_once dirname(__DIR__) . '/auth/acl.php';
+// profile page: any logged-in user (staff or admin)
+require_login();
+?>
 <!doctype html>
 <html lang="en" class="dark">
 

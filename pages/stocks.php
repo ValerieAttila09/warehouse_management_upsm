@@ -1,3 +1,8 @@
+<?php
+require_once dirname(__DIR__) . '/auth/acl.php';
+// stocks/products available to staff and admin
+require_role(['staff', 'admin']);
+?>
 <!doctype html>
 <html lang="en" class="dark">
 
