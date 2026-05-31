@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
-include "./contents/header.php";
+// Redirect to landing page
+header('Location: ./landing_page.php');
+exit;
 ?>
-<body>
-  
-</body>
-</html>
