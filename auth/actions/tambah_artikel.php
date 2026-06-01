@@ -16,20 +16,19 @@ if (!isset($_SESSION['user_id'])) {
 
 $judul = trim($_POST['judul'] ?? '');
 $isi = trim($_POST['isi'] ?? '');
+$id_penulis = (int) ($_POST['id_penulis'] ?? 0);
 
-if ($judul === '' || $isi === '') {
+if ($judul === '' || $isi === '' || $id_penulis <= 0) {
   header('Location: ../../pages/articles.php?error=1');
   exit;
 }
 
-$current_user_id = (int) ($_SESSION['user_id'] ?? 0);
-
-$stmt = $koneksi->prepare("INSERT INTO tb_artikel (judul, isi, id_penulis) VALUES (?, ?, ?)");
+$stmt = $koneksi->prepare("INSERT INTO tb_artikel (judul, isi, id_penulis, status) VALUES (?, ?, ?, 'terbit')");
 if (!$stmt) {
   header('Location: ../../pages/articles.php?error=1');
   exit;
 }
-$stmt->bind_param('ssi', $judul, $isi, $current_user_id);
+$stmt->bind_param('ssi', $judul, $isi, $id_penulis);
 $stmt->execute();
 $stmt->close();
 

@@ -120,8 +120,8 @@
                     while ($row = mysqli_fetch_assoc($res)) {
                       $id = (int) $row['id_artikel'];
                       $title = htmlspecialchars($row['judul']);
-                      $body = htmlspecialchars($row['isi']);
-                      $excerpt = mb_strlen($row['isi']) > 120 ? htmlspecialchars(mb_substr($row['isi'], 0, 120)) . '...' : htmlspecialchars($row['isi']);
+                      $body = $row['isi'];  // Jangan di-escape, render sebagai HTML
+                      $excerpt = mb_strlen($row['isi']) > 120 ? htmlspecialchars(mb_substr(strip_tags($row['isi']), 0, 120)) . '...' : htmlspecialchars(strip_tags($row['isi']));
                       $authors = htmlspecialchars($row['author'] ?: 'Unknown');
                       $author_id = (int) ($row['author_id'] ?? 0);
                       $created = !empty($row['created_at']) ? date('d M Y', strtotime($row['created_at'])) : '-';
@@ -155,7 +155,9 @@
                               <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Authors: <?= $authors ?></p>
                               <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Published: <?= $created ?></p>
                               <hr class="my-3 border-gray-200 dark:border-gray-700">
-                              <p class="whitespace-pre-wrap"><?= nl2br($body) ?></p>
+                              <div class="prose prose-sm max-w-none dark:prose-invert">
+                                <?= $body ?>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -164,7 +166,7 @@
                       <!-- Edit Article Modal -->
                       <div id="edit-article-modal-<?= $id ?>" tabindex="-1" aria-hidden="true" class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full">
                         <div class="relative w-full h-full max-w-3xl px-4 md:h-auto">
-                          <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+                          <div class="relative bg-white rounded-lg shadow p-5 dark:bg-gray-800">
                             <div class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
                               <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Edit article</h3>
                               <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white" data-modal-hide="edit-article-modal-<?= $id ?>">
@@ -173,7 +175,7 @@
                                 </svg>
                               </button>
                             </div>
-                            <form action="../auth/actions/update_artikel.php" method="POST" class="p-6 space-y-6">
+                            <form action="../auth/actions/update_artikel.php" method="POST" class="edit-article-form p-6 space-y-6" data-article-id="<?= $id ?>">
                               <input type="hidden" name="id_artikel" value="<?= $id ?>">
                               <div>
                                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
@@ -182,7 +184,9 @@
                               <div>
                                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
                                 <input type="hidden" name="isi" id="edit-isi-<?= $id ?>" value="<?= htmlspecialchars($row['isi'] ?? '') ?>">
-                                <div id="edit-editor-<?= $id ?>" data-content="<?= htmlspecialchars($row['isi'] ?? '', ENT_QUOTES) ?>" class="prose max-w-full rounded-lg border border-gray-300 bg-white p-3 dark:bg-gray-700 dark:border-gray-600" style="min-height:160px;"></div>
+                                <div id="edit-editor-<?= $id ?>" class="ql-container ql-snow" data-content="<?= htmlspecialchars($row['isi'] ?? '', ENT_QUOTES) ?>">
+                                  <div class="ql-editor" style="min-height: 300px;"></div>
+                                </div>
                               </div>
                               <div>
                                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Author</label>
@@ -192,7 +196,7 @@
                                   <?php endforeach; ?>
                                 </select>
                               </div>
-                              <div class="flex justify-end gap-3 border-t border-gray-200 pt-4 dark:border-gray-700">
+                              <div class="flex justify-end gap-3 mt-4 border-t border-gray-200 pt-4 dark:border-gray-700">
                                 <button type="button" data-modal-hide="edit-article-modal-<?= $id ?>" class="px-4 py-2 rounded-lg bg-gray-600 text-white">Cancel</button>
                                 <button type="submit" class="px-4 py-2 rounded-lg bg-blue-600 text-white">Update Article</button>
                               </div>
@@ -261,15 +265,26 @@
             </svg>
           </button>
         </div>
-        <form action="../auth/actions/tambah_artikel.php" method="POST" class="p-6 space-y-6">
+        <form action="../auth/actions/tambah_artikel.php" method="POST" id="add-article-form" class="p-6 space-y-6">
           <div>
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
             <input type="text" name="judul" class="w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
           </div>
           <div>
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Author</label>
+            <select name="id_penulis" class="w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
+              <option value="">Select Author</option>
+              <?php foreach ($author_options as $author_row): ?>
+                <option value="<?= (int)$author_row['id'] ?>"><?= htmlspecialchars($author_row['nama']) ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div>
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
             <input type="hidden" name="isi" id="add-article-isi" value="">
-            <div id="add-editor" class="prose max-w-full rounded-lg border border-gray-300 bg-white p-3 dark:bg-gray-700 dark:border-gray-600" style="min-height:160px;"></div>
+            <div id="add-editor" class="ql-container ql-snow" style="background: white;">
+              <div class="ql-editor" style="min-height: 300px;"></div>
+            </div>
           </div>
           <div class="flex justify-end gap-3 border-t border-gray-200 pt-4 dark:border-gray-700">
             <button type="button" data-modal-hide="add-article-modal" class="px-4 py-2 rounded-lg bg-gray-600 text-white">Cancel</button>
@@ -279,49 +294,103 @@
       </div>
     </div>
   </div>
-  <script type="module">
-    import {
-      Editor
-    } from 'https://unpkg.com/@tiptap/core?module';
-    import StarterKit from 'https://unpkg.com/@tiptap/starter-kit?module';
 
-    const decodeHtml = (str) => {
-      const doc = new DOMParser().parseFromString(str, 'text/html');
-      return doc.documentElement.textContent;
-    };
+  <!-- Quill Editor CSS & JS -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
-    // Add editor
-    const addEditorEl = document.getElementById('add-editor');
-    let addEditor = null;
-    if (addEditorEl) {
-      addEditor = new Editor({
-        element: addEditorEl,
-        extensions: [StarterKit],
-        content: ''
-      });
-      const addForm = addEditorEl.closest('form');
-      if (addForm) {
-        addForm.addEventListener('submit', function(e) {
-          const hidden = document.getElementById('add-article-isi');
-          if (hidden && addEditor) hidden.value = addEditor.getHTML();
+  <script>
+    // Initialize editors
+    const editors = {};
+
+    function initAddEditor() {
+      const container = document.querySelector('#add-editor .ql-editor');
+      if (container && !editors['add']) {
+        editors['add'] = new Quill('#add-editor', {
+          theme: 'snow',
+          modules: {
+            toolbar: [
+              [{
+                'header': [1, 2, 3, false]
+              }],
+              ['bold', 'italic', 'underline', 'strike'],
+              ['blockquote', 'code-block'],
+              [{
+                'list': 'ordered'
+              }, {
+                'list': 'bullet'
+              }],
+              ['link', 'image'],
+              ['clean']
+            ]
+          }
+        });
+
+        document.getElementById('add-article-form').addEventListener('submit', function(e) {
+          const hiddenInput = document.getElementById('add-article-isi');
+          hiddenInput.value = editors['add'].root.innerHTML;
         });
       }
     }
 
-    // Edit editors
-    document.querySelectorAll('[id^="edit-editor-"]').forEach((el) => {
-      const content = decodeHtml(el.dataset.content || '');
-      const editor = new Editor({
-        element: el,
-        extensions: [StarterKit],
-        content: content
-      });
-      const form = el.closest('form');
-      if (form) {
-        form.addEventListener('submit', function() {
-          const hidden = form.querySelector('input[name="isi"]');
-          if (hidden) hidden.value = editor.getHTML();
+    function initEditEditor(id) {
+      const editorId = `edit-editor-${id}`;
+      const container = document.getElementById(editorId);
+      if (container && !editors[id]) {
+        const content = container.dataset.content || '';
+        editors[id] = new Quill(`#${editorId}`, {
+          theme: 'snow',
+          modules: {
+            toolbar: [
+              [{
+                'header': [1, 2, 3, false]
+              }],
+              ['bold', 'italic', 'underline', 'strike'],
+              ['blockquote', 'code-block'],
+              [{
+                'list': 'ordered'
+              }, {
+                'list': 'bullet'
+              }],
+              ['link', 'image'],
+              ['clean']
+            ]
+          }
         });
+        editors[id].root.innerHTML = content;
+
+        const form = container.closest('form');
+        if (form) {
+          form.addEventListener('submit', function(e) {
+            const hidden = form.querySelector('input[name="isi"]');
+            if (hidden) hidden.value = editors[id].root.innerHTML;
+          });
+        }
       }
+    }
+
+    // Listen for modal opens
+    document.addEventListener('show.bs.modal', function() {
+      setTimeout(initAddEditor, 100);
+    });
+
+    // Initialize edit editors when page loads or modals are toggled
+    const modalTriggers = document.querySelectorAll('[data-modal-toggle^="edit-article-modal-"]');
+    modalTriggers.forEach(trigger => {
+      trigger.addEventListener('click', function() {
+        const modalId = this.getAttribute('data-modal-toggle');
+        const articleId = modalId.replace('edit-article-modal-', '');
+        setTimeout(() => initEditEditor(articleId), 100);
+      });
+    });
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      initAddEditor();
+      document.querySelectorAll('[id^="edit-editor-"]').forEach(el => {
+        const id = el.id.replace('edit-editor-', '');
+        initEditEditor(id);
+      });
     });
   </script>
+</div>
