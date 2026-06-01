@@ -2,10 +2,10 @@
 
 session_start();
 
-require_once dirname(__DIR__) . '/config/koneksi.php';
+require_once '../../config/koneksi.php';
 
 if (!isset($_SESSION['user_id'])) {
-  header("Location: ../auth/logout.php");
+  header("Location: ../logout.php");
   exit;
 }
 
@@ -39,5 +39,5 @@ if ($_SESSION['role'] === 'admin') {
 
 $stmt->execute();
 
-header('Location: ../pages/stocks.php');
+header('Location: ../../pages/stocks.php');
 exit;

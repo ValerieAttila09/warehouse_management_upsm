@@ -39,23 +39,24 @@
 						<form class="lg:pr-3" action="#" method="GET">
 							<label for="products-search" class="sr-only">Search</label>
 							<div class="relative mt-1 lg:w-64 xl:w-96">
-								<input type="text" name="search" id="products-search" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search products by name or SKU">
+								<input type="text" name="search" id="products-search" value="<?= isset($_GET['search']) ? htmlspecialchars(trim($_GET['search'])) : '' ?>" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search products by name or SKU">
 							</div>
 						</form>
 						<?php if ($_SESSION['role'] === 'admin'): ?>
-							<div class="pl-0 mt-3 sm:pl-2 sm:mt-0">
-								<label for="filter-user" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Filter by User:</label>
+							<?php $filter_user = isset($_GET['owner_user_id']) && $_GET['owner_user_id'] !== '' ? (int)$_GET['owner_user_id'] : null; ?>
+							<div class="pl-0 mt-3 sm:px-5 sm:mt-0 sm:mx-2">
+								<!-- <label for="filter-user" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Filter by User:</label> -->
 								<select id="filter-user" name="owner_user_id" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-									<option value="">All Users</option>
+									<option value="" <?= is_null($filter_user) ? ' selected' : '' ?>>All Users</option>
 									<?php
 									require_once __DIR__ . '/../config/koneksi.php';
 									$user_sql = "SELECT id_user, first_name, last_name FROM tb_user WHERE status = 1 ORDER BY first_name ASC";
 									$user_res = mysqli_query($koneksi, $user_sql);
 									if ($user_res) {
 										while ($user_row = mysqli_fetch_assoc($user_res)) {
-											$user_id = htmlspecialchars($user_row['id_user']);
+											$user_id = (int)$user_row['id_user'];
 											$user_name = htmlspecialchars($user_row['first_name'] . ' ' . $user_row['last_name']);
-											echo '<option value="' . $user_id . '">' . $user_name . '</option>';
+											echo '<option value="' . $user_id . '"' . ($filter_user === $user_id ? ' selected' : '') . '>' . $user_name . '</option>';
 										}
 									}
 									?>
@@ -94,40 +95,53 @@
 							</thead>
 							<tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
 								<?php
+								require_once __DIR__ . '/../config/koneksi.php';
 								$filter_user = isset($_GET['owner_user_id']) && $_GET['owner_user_id'] !== '' ? (int)$_GET['owner_user_id'] : null;
 								$search = isset($_GET['search']) ? trim($_GET['search']) : '';
 
 								$current_user_id = (int) $_SESSION['user_id'];
+								$conditions = [];
+								if ($filter_user !== null) {
+									$conditions[] = "p.owner_user_id = $filter_user";
+								} elseif ($_SESSION['role'] !== 'admin') {
+									$conditions[] = "p.owner_user_id = $current_user_id";
+								}
+								if ($search !== '') {
+									$search_safe = mysqli_real_escape_string($koneksi, $search);
+									$conditions[] = "(p.nama LIKE '%$search_safe%' OR p.sku LIKE '%$search_safe%')";
+								}
+								$where_sql = '';
+								if (count($conditions) > 0) {
+									$where_sql = 'WHERE ' . implode(' AND ', $conditions);
+								}
 
 								$sql = "SELECT
-												    p.id_produk,
-												    p.owner_user_id,
-												    p.sku,
-												    p.nama,
-												    p.harga,
-												    p.id_kategori,
-												    p.deskripsi,
-												    p.stok,
-												    p.created_at,
+									p.id_produk,
+									p.owner_user_id,
+									p.sku,
+									p.nama,
+									p.harga,
+									p.id_kategori,
+									p.deskripsi,
+									p.stok,
+									p.created_at,
 
-												    u.first_name,
-												    u.last_name,
+									u.first_name,
+									u.last_name,
 
-												    k.nama_kategori
+									k.nama_kategori
 
-												FROM tb_produk p
+								FROM tb_produk p
 
-												LEFT JOIN tb_user u
-												    ON p.owner_user_id = u.id_user
+								LEFT JOIN tb_user u
+									ON p.owner_user_id = u.id_user
 
-												LEFT JOIN tb_kategori_produk k
-												    ON p.id_kategori = k.id_kategori
+								LEFT JOIN tb_kategori_produk k
+									ON p.id_kategori = k.id_kategori
 
-												WHERE p.owner_user_id = $current_user_id
+								$where_sql
 
-												ORDER BY p.created_at DESC
-												";
-
+								ORDER BY p.created_at DESC";
 								$res = mysqli_query($koneksi, $sql);
 								$no = 1;
 								if ($res && mysqli_num_rows($res) > 0) {
@@ -191,7 +205,7 @@
 																</button>
 															</div>
 															<!-- Modal body -->
-															<form action="../actions/update_product.php" method="POST" class="space-y-4 py-4">
+															<form action="../auth/actions/update_produk.php" method="POST" class="space-y-4 py-4">
 
 																<input type="hidden" name="id_produk" value="<?= $id ?>">
 
@@ -312,7 +326,7 @@
 												</div>
 
 												<form
-													action="../actions/delete_product.php"
+													action="../auth/actions/delete_produk.php"
 													method="POST"
 													onsubmit="return confirm('Yakin ingin menghapus produk ini?');">
 
@@ -393,7 +407,7 @@
 
 			</div>
 
-			<form action="../actions/create_product.php" method="POST">
+			<form action="../auth/actions/tambah_produk.php" method="POST">
 
 				<div class="p-6 space-y-4">
 

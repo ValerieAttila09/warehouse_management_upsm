@@ -2,7 +2,7 @@
 
 session_start();
 
-require_once dirname(__DIR__) . '/config/koneksi.php';
+require_once "../../config/koneksi.php";
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
   header('Location: ../pages/stocks.php');
@@ -73,7 +73,7 @@ $stmt->bind_param(
 );
 
 if ($stmt->execute()) {
-  header("Location: ../pages/stocks.php?updated=1");
+  header("Location: ../../pages/stocks.php?updated=1");
   exit;
 }
 

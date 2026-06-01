@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const phoneInput = form.querySelector('input[name="phone"]'); if (phoneInput) phoneInput.value = phone;
       const zipInput = form.querySelector('input[name="zip_code"]'); if (zipInput) zipInput.value = zip;
       const profileInput = form.querySelector('input[name="profile_picture"]'); if (profileInput) profileInput.value = profile;
-      
+
       console.log('Edit form populated with id:', id);
     });
   });
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
           info.textContent = name ? name.textContent.trim() : '';
         }
       }
-      
+
       console.log('Delete user selected - id:', selectedDeleteUserId, 'email:', selectedDeleteUserEmail);
     });
   });
@@ -86,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (confirmDeleteBtn) {
     confirmDeleteBtn.addEventListener('click', (e) => {
       e.preventDefault();
+      console.log('Confirm delete clicked', { selectedDeleteUserId, selectedDeleteUserEmail });
       const payload = {};
       if (selectedDeleteUserId) payload.id_user = selectedDeleteUserId;
       else if (selectedDeleteUserEmail) payload.email = selectedDeleteUserEmail;
@@ -120,6 +121,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (tr) tr.remove();
             // hide modal if using data-modal-hide attribute
             document.querySelectorAll('[data-modal-hide="delete-user-modal"]').forEach(el => el.click());
+            const modal = document.getElementById('delete-user-modal');
+            if (modal) {
+              modal.classList.add('hidden');
+            }
           } else {
             alert(data.message || 'Gagal menghapus user');
           }
@@ -130,6 +135,61 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Delegated click handler as a fallback if the confirm button is replaced by UI library
+  document.addEventListener('click', (ev) => {
+    const btn = ev.target.closest && ev.target.closest('#confirm-delete-btn');
+    if (!btn) return;
+    ev.preventDefault();
+    console.log('Delegated confirm delete clicked', { selectedDeleteUserId, selectedDeleteUserEmail });
+    const payload = {};
+    if (selectedDeleteUserId) payload.id_user = selectedDeleteUserId;
+    else if (selectedDeleteUserEmail) payload.email = selectedDeleteUserEmail;
+    else return;
+
+    ajaxPost('../auth/users_delete.php', payload)
+      .then(resp => {
+        if (resp.status === 403) {
+          const pwd = prompt('Masukkan password admin untuk konfirmasi:');
+          if (!pwd) return;
+          return ajaxPost('../auth/admin_confirm.php', { admin_password: pwd }).then(r => {
+            return r.json().then(json => {
+              if (json.success) {
+                return ajaxPost('../auth/users_delete.php', payload);
+              } else {
+                alert(json.message || 'Konfirmasi gagal');
+              }
+            });
+          });
+        }
+        return resp.json();
+      })
+      .then(data => {
+        if (!data) return;
+        if (data.success) {
+          alert(data.message || 'User deleted');
+          let tr = null;
+          if (selectedDeleteUserId) tr = document.querySelector('tr[data-user-id="' + selectedDeleteUserId + '"]');
+          if (!tr && selectedDeleteUserEmail) tr = Array.from(document.querySelectorAll('tr')).find(r => r.dataset.email === selectedDeleteUserEmail);
+          if (tr) tr.remove();
+          document.querySelectorAll('[data-modal-hide="delete-user-modal"]').forEach(el => el.click());
+          const modal = document.getElementById('delete-user-modal');
+          if (modal) modal.classList.add('hidden');
+          // remove backdrop overlays potentially left by UI library
+          Array.from(document.querySelectorAll('.fixed.inset-0')).forEach(el => {
+            const style = window.getComputedStyle(el);
+            if (style.backgroundColor && style.backgroundColor !== 'rgba(0, 0, 0, 0)') {
+              try { el.remove(); } catch (e) { /* ignore */ }
+            }
+          });
+        } else {
+          alert(data.message || 'Gagal menghapus user');
+        }
+      }).catch(err => {
+        console.error(err);
+        alert('Terjadi kesalahan jaringan.');
+      });
+  });
+
   // Optional: AJAX submit for add/edit forms to show messages without full page reload
   ['add-user-form', 'edit-user-form'].forEach(id => {
     const f = document.getElementById(id);
@@ -138,11 +198,11 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const url = f.action;
       const data = Object.fromEntries(new FormData(f).entries());
-      
+
       function submitForm() {
         return ajaxPost(url, data);
       }
-      
+
       submitForm()
         .then(r => {
           if (r.status === 403) {
