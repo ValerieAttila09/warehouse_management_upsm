@@ -24,7 +24,7 @@ include "../contents/header.php";
 		<div class="fixed inset-0 z-10 hidden bg-gray-900/50 dark:bg-gray-900/90" id="sidebarBackdrop"></div>
 
 		<?php
-		include "../contents/products_content.php";
+		include "../contents/stocks_content.php";
 		?>
 
 	</div>
