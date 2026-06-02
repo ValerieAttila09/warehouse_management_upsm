@@ -8,6 +8,7 @@
   font-variation-settings:
     "GRAD" 0;
 }
+
 .google-sans-regular {
   font-family: "Google Sans", sans-serif;
   font-optical-sizing: auto;
@@ -16,6 +17,7 @@
   font-variation-settings:
     "GRAD" 0;
 }
+
 .google-sans-medium {
   font-family: "Google Sans", sans-serif;
   font-optical-sizing: auto;
@@ -24,6 +26,7 @@
   font-variation-settings:
     "GRAD" 0;
 }
+
 .google-sans-semibold {
   font-family: "Google Sans", sans-serif;
   font-optical-sizing: auto;
@@ -32,6 +35,7 @@
   font-variation-settings:
     "GRAD" 0;
 }
+
 .google-sans-bold {
   font-family: "Google Sans", sans-serif;
   font-optical-sizing: auto;
@@ -39,4 +43,11 @@
   font-style: normal;
   font-variation-settings:
     "GRAD" 0;
+}
+
+.article-card-excerpt {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

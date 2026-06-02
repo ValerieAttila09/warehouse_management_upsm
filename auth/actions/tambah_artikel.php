@@ -96,18 +96,26 @@ if ($user_result->num_rows === 0) {
 $user_data = $user_result->fetch_assoc();
 $user_stmt->close();
 
-// Cek apakah user sudah punya author entry di tb_author_artikel
-$check_stmt = $koneksi->prepare("SELECT id FROM tb_author_artikel WHERE nama = ? AND email = ? LIMIT 1");
-$check_stmt->bind_param('ss', $user_data['first_name'], $user_data['email']);
+// Cek apakah user sudah punya author entry di tb_author_artikel berdasarkan email
+$author_name = trim($user_data['first_name'] . ' ' . $user_data['last_name']);
+$check_stmt = $koneksi->prepare("SELECT id, nama FROM tb_author_artikel WHERE email = ? LIMIT 1");
+$check_stmt->bind_param('s', $user_data['email']);
 $check_stmt->execute();
 $check_result = $check_stmt->get_result();
 
 if ($check_result->num_rows > 0) {
   $author_row = $check_result->fetch_assoc();
   $id_penulis = $author_row['id'];
+
+  // Jika nama author di tabel berbeda karena user mengubah profil, kita perbarui
+  if (trim($author_row['nama']) !== $author_name) {
+    $update_author = $koneksi->prepare("UPDATE tb_author_artikel SET nama = ? WHERE id = ?");
+    $update_author->bind_param('si', $author_name, $author_row['id']);
+    $update_author->execute();
+    $update_author->close();
+  }
 } else {
   // Buat author entry baru untuk user ini
-  $author_name = $user_data['first_name'] . ' ' . $user_data['last_name'];
   $insert_author = $koneksi->prepare("INSERT INTO tb_author_artikel (nama, email) VALUES (?, ?)");
   $insert_author->bind_param('ss', $author_name, $user_data['email']);
   $insert_author->execute();

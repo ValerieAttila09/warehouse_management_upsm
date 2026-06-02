@@ -110,7 +110,7 @@ $stmt = $koneksi->prepare(
   "UPDATE tb_artikel SET judul = ?, slug = ?, ringkasan = ?, isi = ?, thumbnail = ?, id_kategori = ?, status = ?, tanggal_terbit = ? WHERE id_artikel = ?"
 );
 if ($stmt) {
-  $stmt->bind_param('sssssisssi', $judul, $slug, $ringkasan, $isi, $thumbnail, $id_kategori, $status, $tanggal_terbit, $id_artikel);
+  $stmt->bind_param('sssssissi', $judul, $slug, $ringkasan, $isi, $thumbnail, $id_kategori, $status, $tanggal_terbit, $id_artikel);
   $stmt->execute();
   $stmt->close();
 }

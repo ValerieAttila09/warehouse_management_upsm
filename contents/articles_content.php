@@ -94,7 +94,7 @@
           }
           ?>
           <div class="items-center hidden mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700">
-            <form class="lg:pr-3" action="#" method="GET">
+            <form class="flex items-center gap-2" action="#" method="GET">
               <label for="articles-search" class="sr-only">Search</label>
               <div class="relative mt-1 lg:w-64 xl:w-96">
                 <input type="text" name="search" id="articles-search" value="<?= isset($_GET['search']) ? htmlspecialchars(trim($_GET['search'])) : '' ?>" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search by title or content">
@@ -114,10 +114,15 @@
                   </select>
                 </div>
               <?php endif; ?>
+              <button
+                type="button"
+                data-modal-target="add-article-modal"
+                data-modal-toggle="add-article-modal"
+                class="text-white bg-blue-600 hover:bg-blue-700 rounded-lg px-5 py-2.5">
+                + Add Article
+              </button>
+            </form>
           </div>
-          <button data-modal-target="add-article-modal" data-modal-toggle="add-article-modal" class="text-white bg-blue-600 hover:bg-blue-700 rounded-lg px-5 py-2.5">
-            + Add Article
-          </button>
         </div>
       </div>
 
