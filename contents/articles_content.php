@@ -1,6 +1,45 @@
 <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
   <main>
 
+    <!-- Alert Messages -->
+    <?php
+    $success_msg = '';
+    $error_msg = '';
+
+    if (isset($_GET['created'])) {
+      $success_msg = 'Article created successfully!';
+    } elseif (isset($_GET['updated'])) {
+      $success_msg = 'Article updated successfully!';
+    } elseif (isset($_GET['deleted'])) {
+      $success_msg = 'Article deleted successfully!';
+    } elseif (isset($_GET['error'])) {
+      $error_code = $_GET['error'];
+      if ($error_code === '1') {
+        $error_msg = 'An error occurred. Please fill in all required fields.';
+      } elseif ($error_code === '3') {
+        $error_msg = 'You do not have permission to perform this action.';
+      } else {
+        $error_msg = 'An unexpected error occurred.';
+      }
+    }
+
+    if ($success_msg):
+    ?>
+      <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mx-4 mt-4 relative" role="alert">
+        <span class="block sm:inline"><?= htmlspecialchars($success_msg) ?></span>
+      </div>
+    <?php
+    endif;
+
+    if ($error_msg):
+    ?>
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mx-4 mt-4 relative" role="alert">
+        <span class="block sm:inline"><?= htmlspecialchars($error_msg) ?></span>
+      </div>
+    <?php
+    endif;
+    ?>
+
     <div class="bg-white block lg:mt-1.5">
       <div class="p-4 w-full border-b dark:bg-gray-800 dark:border-gray-700">
         <div class="mb-4">
@@ -43,6 +82,14 @@
           if ($author_res) {
             while ($author_row = mysqli_fetch_assoc($author_res)) {
               $author_options[] = $author_row;
+            }
+          }
+          $category_sql = "SELECT id, nama FROM tb_kategori_artikel ORDER BY nama ASC";
+          $category_res = mysqli_query($koneksi, $category_sql);
+          $category_options = [];
+          if ($category_res) {
+            while ($category_row = mysqli_fetch_assoc($category_res)) {
+              $category_options[] = $category_row;
             }
           }
           ?>
@@ -106,12 +153,20 @@
                   $sql = "SELECT
                             a.id_artikel,
                             a.judul,
+                            a.slug,
+                            a.ringkasan,
                             a.isi,
+                            a.thumbnail,
+                            a.id_kategori,
+                            a.status,
+                            a.tanggal_terbit,
                             a.created_at,
                             a.id_penulis AS author_id,
-                            p.nama AS author
+                            p.nama AS author,
+                            k.nama AS kategori
                           FROM tb_artikel a
                           LEFT JOIN tb_author_artikel p ON a.id_penulis = p.id
+                          LEFT JOIN tb_kategori_artikel k ON a.id_kategori = k.id
                           $where_sql
                           ORDER BY a.created_at DESC";
                   $res = mysqli_query($koneksi, $sql);
@@ -124,6 +179,14 @@
                       $excerpt = mb_strlen($row['isi']) > 120 ? htmlspecialchars(mb_substr(strip_tags($row['isi']), 0, 120)) . '...' : htmlspecialchars(strip_tags($row['isi']));
                       $authors = htmlspecialchars($row['author'] ?: 'Unknown');
                       $author_id = (int) ($row['author_id'] ?? 0);
+                      $slug_value = htmlspecialchars($row['slug'] ?? '');
+                      $ringkasan_value = htmlspecialchars($row['ringkasan'] ?? '');
+                      $thumbnail_value = htmlspecialchars($row['thumbnail'] ?? '');
+                      $category_value = (int) ($row['id_kategori'] ?? 0);
+                      $category_name = htmlspecialchars($row['kategori'] ?? 'Uncategorized');
+                      $status_value = htmlspecialchars($row['status'] ?? 'draft');
+                      $tanggal_terbit_value = !empty($row['tanggal_terbit']) ? date('Y-m-d\TH:i', strtotime($row['tanggal_terbit'])) : '';
+                      $formatted_publication = !empty($row['tanggal_terbit']) ? date('d M Y H:i', strtotime($row['tanggal_terbit'])) : '-';
                       $created = !empty($row['created_at']) ? date('d M Y', strtotime($row['created_at'])) : '-';
                   ?>
                       <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -152,8 +215,23 @@
                               </button>
                             </div>
                             <div class="p-6 space-y-4 text-gray-700 dark:text-gray-300">
-                              <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Authors: <?= $authors ?></p>
-                              <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Published: <?= $created ?></p>
+                              <?php if ($thumbnail_value !== ''): ?>
+                                <div class="mb-4">
+                                  <img src="<?= $thumbnail_value ?>" alt="Thumbnail for <?= $title ?>" class="w-full rounded-lg object-cover max-h-72">
+                                </div>
+                              <?php endif; ?>
+                              <div class="grid gap-2 md:grid-cols-2">
+                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Author: <?= $authors ?></p>
+                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Category: <?= $category_name ?></p>
+                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Status: <?= ucfirst($status_value) ?></p>
+                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Published: <?= $formatted_publication ?></p>
+                              </div>
+                              <?php if ($ringkasan_value !== ''): ?>
+                                <div class="p-4 bg-gray-100 rounded-lg dark:bg-gray-900">
+                                  <p class="text-sm text-gray-700 dark:text-gray-300"><strong>Ringkasan</strong></p>
+                                  <p class="mt-2 text-sm text-gray-600 dark:text-gray-400"><?= $ringkasan_value ?></p>
+                                </div>
+                              <?php endif; ?>
                               <hr class="my-3 border-gray-200 dark:border-gray-700">
                               <div class="prose prose-sm max-w-none dark:prose-invert">
                                 <?= $body ?>
@@ -181,20 +259,55 @@
                                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
                                 <input type="text" name="judul" value="<?= $title ?>" class="w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
                               </div>
+                              <div class="grid gap-4 md:grid-cols-2">
+                                <div>
+                                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Slug</label>
+                                  <input type="text" name="slug" value="<?= $slug_value ?>" placeholder="contoh-artikel-slug" class="w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                  <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">Optional. Biarkan kosong untuk mempertahankan atau buat baru dari judul.</p>
+                                </div>
+                                <div>
+                                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                                  <select name="id_kategori" class="w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                    <option value="" <?= $category_value === 0 ? 'selected' : '' ?>>Uncategorized</option>
+                                    <?php foreach ($category_options as $category_row): ?>
+                                      <option value="<?= (int) $category_row['id'] ?>" <?= $category_value === (int) $category_row['id'] ? 'selected' : '' ?>><?= htmlspecialchars($category_row['nama']) ?></option>
+                                    <?php endforeach; ?>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="grid gap-4 md:grid-cols-2">
+                                <div>
+                                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+                                  <select name="status" class="w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                    <option value="terbit" <?= $status_value === 'terbit' ? 'selected' : '' ?>>Terbit</option>
+                                    <option value="draft" <?= $status_value === 'draft' ? 'selected' : '' ?>>Draft</option>
+                                    <option value="arsip" <?= $status_value === 'arsip' ? 'selected' : '' ?>>Arsip</option>
+                                  </select>
+                                </div>
+                                <div>
+                                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Publish Date</label>
+                                  <input type="datetime-local" name="tanggal_terbit" value="<?= $tanggal_terbit_value ?>" class="w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                </div>
+                              </div>
+                              <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Thumbnail URL</label>
+                                <input type="text" name="thumbnail" value="<?= $thumbnail_value ?>" placeholder="https://example.com/image.jpg" class="w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                              </div>
+                              <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ringkasan</label>
+                                <textarea name="ringkasan" rows="3" class="w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"><?= $ringkasan_value ?></textarea>
+                              </div>
+                              <div class="p-3 bg-gray-50 border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600">
+                                <p class="text-sm text-gray-700 dark:text-gray-300">
+                                  <span class="font-medium">Author:</span> <?= $authors ?> (cannot be changed)
+                                </p>
+                              </div>
                               <div>
                                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
                                 <input type="hidden" name="isi" id="edit-isi-<?= $id ?>" value="<?= htmlspecialchars($row['isi'] ?? '') ?>">
                                 <div id="edit-editor-<?= $id ?>" class="ql-container ql-snow" data-content="<?= htmlspecialchars($row['isi'] ?? '', ENT_QUOTES) ?>">
                                   <div class="ql-editor" style="min-height: 300px;"></div>
                                 </div>
-                              </div>
-                              <div>
-                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Author</label>
-                                <select name="id_penulis" class="w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
-                                  <?php foreach ($author_options as $author_row): ?>
-                                    <option value="<?= (int)$author_row['id'] ?>" <?= $author_id === (int)$author_row['id'] ? ' selected' : '' ?>><?= htmlspecialchars($author_row['nama']) ?></option>
-                                  <?php endforeach; ?>
-                                </select>
                               </div>
                               <div class="flex justify-end gap-3 mt-4 border-t border-gray-200 pt-4 dark:border-gray-700">
                                 <button type="button" data-modal-hide="edit-article-modal-<?= $id ?>" class="px-4 py-2 rounded-lg bg-gray-600 text-white">Cancel</button>
@@ -271,13 +384,48 @@
             <input type="text" name="judul" class="w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
           </div>
           <div>
-            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Author</label>
-            <select name="id_penulis" class="w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
-              <option value="">Select Author</option>
-              <?php foreach ($author_options as $author_row): ?>
-                <option value="<?= (int)$author_row['id'] ?>"><?= htmlspecialchars($author_row['nama']) ?></option>
-              <?php endforeach; ?>
-            </select>
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Slug</label>
+            <input type="text" name="slug" placeholder="contoh-artikel-slug" class="w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">Optional. Jika kosong, slug akan dibuat otomatis dari judul.</p>
+          </div>
+          <div class="grid gap-4 md:grid-cols-2">
+            <div>
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+              <select name="id_kategori" class="w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                <option value="">Uncategorized</option>
+                <?php foreach ($category_options as $category_row): ?>
+                  <option value="<?= (int) $category_row['id'] ?>"><?= htmlspecialchars($category_row['nama']) ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <div>
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+              <select name="status" class="w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                <option value="terbit" selected>Terbit</option>
+                <option value="draft">Draft</option>
+                <option value="arsip">Arsip</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid gap-4 md:grid-cols-2">
+            <div>
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Thumbnail URL</label>
+              <input type="text" name="thumbnail" placeholder="https://example.com/image.jpg" class="w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            </div>
+            <div>
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Publish Date</label>
+              <input type="datetime-local" name="tanggal_terbit" class="w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+              <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">Biarkan kosong untuk menggunakan waktu saat ini jika status terbit.</p>
+            </div>
+          </div>
+          <div>
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ringkasan</label>
+            <textarea name="ringkasan" rows="3" placeholder="Ringkasan singkat artikel untuk preview..." class="w-full rounded-lg border border-gray-300 bg-gray-50 text-gray-900 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"></textarea>
+          </div>
+          <div class="p-3 bg-blue-50 border border-blue-200 rounded-lg dark:bg-blue-900 dark:border-blue-700">
+            <p class="text-sm text-blue-800 dark:text-blue-200">
+              <span class="font-medium">Author:</span> This article will be created under your account (<?= htmlspecialchars($_SESSION['email'] ?? 'Your Name') ?>)
+            </p>
           </div>
           <div>
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
