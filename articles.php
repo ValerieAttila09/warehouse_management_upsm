@@ -29,25 +29,25 @@ if ($result) {
 <html lang="en">
 <?php include __DIR__ . '/contents/header.php'; ?>
 
-<body class="bg-slate-950 text-gray-100">
+<body class="bg-slate-950 text-neutral-100">
 
   <nav class="fixed top-0 w-full bg-slate-900/95 backdrop-blur-md z-50 border-b border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
         <div class="flex items-center space-x-2">
-          <a href="./index.php" class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-cyan-500 rounded-lg flex items-center justify-center font-bold text-slate-900">W</a>
-          <a href="./index.php" class="text-xl font-bold">Warehouse</a>
+          <a href="./index.php" class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-cyan-500 rounded-lg flex items-center justify-center google-sans-bold text-slate-900">W</a>
+          <a href="./index.php" class="text-xl google-sans-bold">Warehouse</a>
         </div>
         <div class="hidden md:flex space-x-8">
           <a href="./index.php" class="hover:text-emerald-400 transition duration-300">Home</a>
-          <a href="./articles.php" class="text-emerald-400 font-semibold transition duration-300">Articles</a>
+          <a href="./articles.php" class="text-emerald-400 google-sans-semibold transition duration-300">Articles</a>
           <a href="./index.php#features" class="hover:text-emerald-400 transition duration-300">Features</a>
           <a href="./index.php#pricing" class="hover:text-emerald-400 transition duration-300">Pricing</a>
         </div>
         <div class="hidden md:block">
-          <a href="./index.php" class="px-6 py-2 bg-emerald-500 hover:bg-emerald-600 rounded-lg font-semibold transition duration-300">Back Home</a>
+          <a href="./index.php" class="px-6 py-2 bg-emerald-500 hover:bg-emerald-600 rounded-lg google-sans-semibold transition duration-300">Back Home</a>
         </div>
-        <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-white">
+        <button id="mobileMenuBtn" class="md:hidden text-neutral-300 hover:text-white">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
@@ -62,7 +62,7 @@ if ($result) {
       <a href="./articles.php" class="block px-4 py-2 text-emerald-400 rounded">Articles</a>
       <a href="./index.php#features" class="block px-4 py-2 hover:bg-slate-700 rounded">Features</a>
       <a href="./index.php#pricing" class="block px-4 py-2 hover:bg-slate-700 rounded">Pricing</a>
-      <a href="./index.php" class="block w-full mt-4 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 rounded text-center font-semibold">Back Home</a>
+      <a href="./index.php" class="block w-full mt-4 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 rounded text-center google-sans-semibold">Back Home</a>
     </div>
   </div>
 
@@ -71,22 +71,22 @@ if ($result) {
       <section class="pb-14">
         <div class="text-center max-w-3xl mx-auto">
           <p class="text-sm uppercase tracking-[0.35em] text-emerald-400 mb-4">Warehouse Insights</p>
-          <h1 class="text-4xl sm:text-5xl font-semibold text-white mb-5">Professional content for operational excellence</h1>
+          <h1 class="text-4xl sm:text-5xl google-sans-semibold text-white mb-5">Professional content for operational excellence</h1>
           <p class="text-slate-400 text-base sm:text-lg leading-8">Discover the latest published articles from the Warehouse Management community. Each entry is designed to help you improve workflows, control inventory, and manage fulfillment with confidence.</p>
         </div>
 
         <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <div class="rounded-[28px] border border-slate-800/80 bg-slate-900/90 p-6 shadow-[0_20px_40px_rgba(15,23,42,0.2)]">
             <p class="text-sm uppercase tracking-[0.32em] text-slate-400 mb-3">Published articles</p>
-            <p class="text-4xl font-semibold text-white"><?= count($articles) ?></p>
+            <p class="text-4xl google-sans-semibold text-white"><?= count($articles) ?></p>
           </div>
           <div class="rounded-[28px] border border-slate-800/80 bg-slate-900/90 p-6 shadow-[0_20px_40px_rgba(15,23,42,0.16)]">
             <p class="text-sm uppercase tracking-[0.32em] text-slate-400 mb-3">Fresh perspective</p>
-            <p class="text-4xl font-semibold text-white">Modern, clean layout</p>
+            <p class="text-4xl google-sans-semibold text-white">Modern, clean layout</p>
           </div>
           <div class="rounded-[28px] border border-slate-800/80 bg-slate-900/90 p-6 shadow-[0_20px_40px_rgba(15,23,42,0.16)]">
             <p class="text-sm uppercase tracking-[0.32em] text-slate-400 mb-3">Brand tone</p>
-            <p class="text-4xl font-semibold text-white">Minimal and professional</p>
+            <p class="text-4xl google-sans-semibold text-white">Minimal and professional</p>
           </div>
         </div>
       </section>
@@ -123,7 +123,7 @@ if ($result) {
                     <span class="rounded-full bg-emerald-500/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-emerald-300"><?= $category ?></span>
                     <span class="rounded-full bg-slate-700/80 px-3 py-1 text-xs uppercase tracking-[0.2em] text-slate-300">Published</span>
                   </div>
-                  <h2 class="text-2xl font-semibold text-white mb-4"><?= $title ?></h2>
+                  <h2 class="text-2xl google-sans-semibold text-white mb-4"><?= $title ?></h2>
                   <p class="article-card-excerpt text-slate-400 leading-7 mb-6"><?= $excerpt ?></p>
                   <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between text-sm text-slate-400">
                     <span>By <?= $author ?></span>

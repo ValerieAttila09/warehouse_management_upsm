@@ -10,18 +10,18 @@ require_role(['staff', 'admin']);
 include "../contents/header.php";
 ?>
 
-<body class="bg-gray-50 dark:bg-gray-800">
+<body class="bg-neutral-50 dark:bg-neutral-800">
 
 	<?php
 	include "../contents/widgets/navbar.php";
 	?>
 
-	<div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
+	<div class="flex pt-16 overflow-hidden bg-neutral-50 dark:bg-neutral-900">
 		<?php
 		include "../contents/widgets/sidebar.php";
 		?>
 
-		<div class="fixed inset-0 z-10 hidden bg-gray-900/50 dark:bg-gray-900/90" id="sidebarBackdrop"></div>
+		<div class="fixed inset-0 z-10 hidden bg-neutral-900/50 dark:bg-neutral-900/90" id="sidebarBackdrop"></div>
 
 		<?php
 		include "../contents/stocks_content.php";

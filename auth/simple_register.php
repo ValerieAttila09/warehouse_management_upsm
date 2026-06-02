@@ -238,7 +238,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="pb-5 pt-2">
-              <label class="block text-sm font-medium text-neutral-400 mb-2">Foto Profil</label>
+              <label class="block text-sm google-sans-medium text-neutral-400 mb-2">Foto Profil</label>
               <div class="flex items-center justify-center gap-4 p-3 border border-neutral-700 rounded-md bg-neutral-800">
                 <div class="w-20 h-20 bg-neutral-100 rounded-full overflow-hidden flex items-center justify-center">
                   <img id="avatarPreview" src="https://via.placeholder.com/80" alt="preview" class="w-full h-full object-cover" />

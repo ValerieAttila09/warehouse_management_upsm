@@ -14,8 +14,8 @@
 	<script src="https://cdn.tailwindcss.com"></script>
 
 	<!-- Custom CSS -->
-	<link rel="stylesheet" href="./style/global.css">
-	<link rel="stylesheet" href="./style/landing.css">
+	<link rel="stylesheet" href="../style/global.css">
+	<!-- <link rel="stylesheet" href="../style/landing.css"> -->
 
 	<!-- Feather Icons -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.css">
@@ -36,6 +36,11 @@
 		body {
 			scroll-behavior: smooth;
 		}
+
+		.input-focus:focus {
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.12);
+    }
 	</style>
 
 	<script>

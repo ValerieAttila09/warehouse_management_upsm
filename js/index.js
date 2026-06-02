@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (modal) {
         const info = modal.querySelector('.delete-user-info');
         if (info && tr) {
-          const name = tr.querySelector('.text-base.font-semibold');
+          const name = tr.querySelector('.text-base.google-sans-semibold');
           info.textContent = name ? name.textContent.trim() : '';
         }
       }

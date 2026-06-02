@@ -332,7 +332,7 @@ section {
   top: 0;
   left: 0;
   height: 3px;
-  background: linear-gradient(90deg, #10b981, #06b6d4);
+  background: linear-gradient(90deg, #3d870b, #96e306);
   z-index: 100;
   animation: widthGrow 0.3s ease;
 }
