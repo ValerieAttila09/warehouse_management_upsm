@@ -1,3 +1,22 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+	session_start();
+}
+require_once '../config/koneksi.php';
+
+$user = null;
+$userId = $_SESSION['user_id'] ?? null;
+if ($userId) {
+	$stmt = $koneksi->prepare('SELECT first_name, last_name, email, country, city, phone_number, zip_code, profile_picture FROM tb_user WHERE id_user = ? LIMIT 1');
+	if ($stmt) {
+		$stmt->bind_param('i', $userId);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$user = $result->fetch_assoc();
+		$stmt->close();
+	}
+}
+?>
 <nav class="fixed z-30 w-full bg-white border-b border-neutral-200 dark:bg-neutral-800 dark:border-neutral-700">
 	<div class="px-3 py-3 lg:px-5 lg:pl-3">
 		<div class="flex items-center justify-between">
@@ -60,10 +79,10 @@
 					<div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-neutral-100 rounded shadow dark:bg-neutral-700 dark:divide-neutral-600" id="dropdown-2">
 						<div class="px-4 py-3" role="none">
 							<p class="text-sm text-neutral-900 dark:text-white" role="none">
-								Neil Sims
+								<?php echo htmlspecialchars($user['first_name'] ?? '') . htmlspecialchars($user['last_name'] ?? ''); ?>
 							</p>
 							<p class="text-sm google-sans-medium text-neutral-900 truncate dark:text-neutral-300" role="none">
-								neil.sims@flowbite.com
+								<?php echo htmlspecialchars($user['email'] ?? ''); ?>
 							</p>
 						</div>
 						<ul class="py-1" role="none">
