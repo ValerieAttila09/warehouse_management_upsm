@@ -145,7 +145,10 @@
                   <?php
                   $search = isset($_GET['search']) ? trim($_GET['search']) : '';
                   $author_filter = isset($_GET['author_id']) && $_GET['author_id'] !== '' ? (int)$_GET['author_id'] : null;
+                  $current_user_id = (int) $_SESSION['user_id'];
                   $conditions = [];
+                  // Filter berdasarkan user yang login - hanya tampilkan artikel milik user ini
+                  $conditions[] = "a.user_id = $current_user_id";
                   if ($author_filter !== null) {
                     $conditions[] = "a.id_penulis = $author_filter";
                   }

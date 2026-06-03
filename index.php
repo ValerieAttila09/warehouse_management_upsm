@@ -1,438 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include "./contents/header.php"; ?>
 
-<body class="bg-slate-900 text-neutral-100">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Warehouse Management System</title>
+  <meta name="description" content="Warehouse Management System — manage inventory, users, and deliveries with a modern, responsive dashboard." />
+  <!-- Tailwind CSS (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#138253',
+            accent: '#006239'
+          }
+        }
+      }
+    }
+  </script>
+  <!-- GSAP for subtle animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
+  <style>
+    /* Dark glass effect */
+    .glass {
+      background: rgba(15, 49, 24, 0.6);
+      backdrop-filter: blur(6px);
+      border: 1px solid #006239;
+    }
+    
+    .card-bg {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+      /* border: 1px solid #323232; */
+    }
 
-  <!-- Navigation Bar -->
-  <nav class="fixed top-0 w-full bg-slate-900/95 backdrop-blur-md z-50 border-b border-slate-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <div class="flex items-center space-x-2">
-          <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-cyan-500 rounded-lg flex items-center justify-center google-sans-bold text-slate-900">W</div>
-          <span class="text-xl google-sans-bold">Warehouse</span>
+
+    .google-sans-thin {
+      font-family: "Google Sans", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 300;
+      font-style: normal;
+      font-variation-settings:
+        "GRAD" 0;
+    }
+
+    .google-sans-regular {
+      font-family: "Google Sans", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+      font-variation-settings:
+        "GRAD" 0;
+    }
+
+    .google-sans-medium {
+      font-family: "Google Sans", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 500;
+      font-style: normal;
+      font-variation-settings:
+        "GRAD" 0;
+    }
+
+    .google-sans-semibold {
+      font-family: "Google Sans", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 600;
+      font-style: normal;
+      font-variation-settings:
+        "GRAD" 0;
+    }
+
+    .google-sans-bold {
+      font-family: "Google Sans", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 700;
+      font-style: normal;
+      font-variation-settings:
+        "GRAD" 0;
+    }
+
+    /* Small form tweaks */
+    input,
+    textarea {
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+  </style>
+</head>
+
+<body class="antialiased google-sans-regular text-neutral-100 bg-[#121212]">
+  <!-- NAV -->
+  <header class="w-full bg-transparent fixed top-0 left-0 z-40">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      <a href="index.php" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center text-neutral-100 google-sans-bold">W</div>
+        <span class="google-sans-semibold text-lg">Warehouse</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="#features" class="text-neutral-300 hover:text-white">Features</a>
+        <a href="#articles" class="text-neutral-300 hover:text-white">Articles</a>
+        <a href="#integrations" class="text-neutral-300 hover:text-white">Integrations</a>
+        <a href="#pricing" class="text-neutral-300 hover:text-white">Pricing</a>
+        <div class="flex items-center gap-1.5">
+          <a href="auth/simple_login.php" class="px-4 py-1.5 rounded-md bg-[#242424] border border-[#323232] hover:bg-neutral-800">Login</a>
+          <a href="auth/simple_register.php" class="px-4 py-1.5 rounded-md bg-accent border border-primary text-neutral-100 hover:opacity-95">Get Started</a>
         </div>
-
-        <!-- Desktop Menu -->
-        <div class="hidden md:flex space-x-8">
-          <a href="./articles.php" class="hover:text-emerald-400 transition duration-300">Articles</a>
-          <a href="#features" class="hover:text-emerald-400 transition duration-300">Features</a>
-          <a href="#services" class="hover:text-emerald-400 transition duration-300">Services</a>
-          <a href="#pricing" class="hover:text-emerald-400 transition duration-300">Pricing</a>
-          <a href="#faq" class="hover:text-emerald-400 transition duration-300">FAQ</a>
+      </nav>
+      <button id="nav-toggle" class="md:hidden p-2 rounded-md border border-[#363636] bg-[#242424]">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-neutral-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden hidden px-6 pb-6 bg-neutral-900/90 border-t border-[#323232]">
+      <div class="flex flex-col gap-3">
+        <a href="#features" class="block py-1.5 text-neutral-300">Features</a>
+        <a href="#articles" class="block py-1.5 text-neutral-300">Articles</a>
+        <a href="#integrations" class="block py-1.5 text-neutral-300">Integrations</a>
+        <a href="#pricing" class="block py-1.5 text-neutral-300">Pricing</a>
+        <div class="flex gap-2 pt-2">
+          <a href="auth/simple_login.php" class="flex-1 text-center py-1.5 border border-[#323232] rounded text-neutral-300">Login</a>
+          <a href="auth/simple_register.php" class="flex-1 text-center py-1.5 bg-accent border border-primary text-neutral-100 rounded">Get Started</a>
         </div>
-
-        <!-- CTA Button -->
-        <button class="hidden md:block px-6 py-2 bg-emerald-500 hover:bg-emerald-600 rounded-lg google-sans-semibold transition duration-300 transform hover:scale-105">
-          Get Started
-        </button>
-
-        <!-- Mobile Menu Button -->
-        <button id="mobileMenuBtn" class="md:hidden text-neutral-300 hover:text-white">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
       </div>
     </div>
-  </nav>
+  </header>
 
-  <!-- Mobile Menu -->
-  <div id="mobileMenu" class="hidden fixed top-16 left-0 right-0 bg-slate-800 md:hidden z-40 border-b border-slate-700">
-    <div class="px-4 py-4 space-y-2">
-      <a href="./articles.php" class="block px-4 py-2 hover:bg-slate-700 rounded">Articles</a>
-      <a href="#features" class="block px-4 py-2 hover:bg-slate-700 rounded">Features</a>
-      <a href="#services" class="block px-4 py-2 hover:bg-slate-700 rounded">Services</a>
-      <a href="#pricing" class="block px-4 py-2 hover:bg-slate-700 rounded">Pricing</a>
-      <a href="#faq" class="block px-4 py-2 hover:bg-slate-700 rounded">FAQ</a>
-      <button class="w-full mt-4 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 rounded google-sans-semibold">Get Started</button>
-    </div>
-  </div>
-
-  <!-- Hero Section -->
-  <section class="pt-40 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-    <!-- Background Elements -->
-    <div class="absolute inset-0 overflow-hidden">
-      <div class="hero-grid"></div>
-    </div>
-
-    <div class="max-w-7xl mx-auto relative z-10">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <!-- Left Content -->
-        <div class="hero-content">
-          <h1 class="text-4xl md:text-5xl lg:text-6xl google-sans-bold mb-6 leading-tight">
-            Tailored Fulfillment for <span class="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">E-Commerce Success</span>
-          </h1>
-          <p class="text-lg text-neutral-400 mb-8">
-            Streamline your logistics operations with our cutting-edge warehouse management solution. Complete satisfaction with tailored fulfillment.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4">
-            <button class="cta-button px-8 py-3 bg-emerald-500 hover:bg-emerald-600 rounded-lg google-sans-semibold transition duration-300 transform hover:scale-105">
-              Book a Meeting
-            </button>
-            <button class="px-8 py-3 border-2 border-emerald-500 text-emerald-400 hover:bg-emerald-500/10 rounded-lg google-sans-semibold transition duration-300">
-              Learn More
-            </button>
-          </div>
+  <!-- HERO -->
+  <main class="pt-28">
+    <section class="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">
+      <div class="space-y-6">
+        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">Warehouse Management, reimagined for teams.</h1>
+        <p class="text-neutral-300 max-w-xl">Powerful inventory, user and shipment workflows with a beautiful, fast dashboard and enterprise-ready controls. Designed for reliability and clarity.</p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="auth/simple_register.php" class="inline-flex items-center gap-3 px-5 py-1.5 rounded-md bg-accent border border-primary text-neutral-100 google-sans-medium shadow">Start free trial</a>
+          <a href="#features" class="inline-flex items-center gap-2 px-5 py-1.5 rounded-md border border-[#363636] bg-[#242424] text-neutral-200">Explore features</a>
         </div>
 
-        <!-- Right Hero Image -->
-        <div class="hero-image hidden md:block">
-          <div class="relative w-full h-96">
-            <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-cyan-500/20 rounded-3xl blur-3xl"></div>
-            <div class="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 border border-slate-700 h-full flex items-center justify-center">
-              <div class="text-center">
-                <div class="text-6xl google-sans-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent mb-4">📦</div>
-                <p class="text-neutral-400">Smart Warehouse Solutions</p>
+        <div class="mt-6 flex flex-wrap gap-4 text-sm text-neutral-400">
+          <div class="flex items-center gap-3 rounded-lg px-4 py-3 bg-neutral-800/60">
+            <strong class="text-white">99.9%</strong>
+            <span>Uptime</span>
+          </div>
+          <div class="flex items-center gap-3 rounded-lg px-4 py-3 bg-neutral-800/60">
+            <strong class="text-white">Role-based</strong>
+            <span>Access control</span>
+          </div>
+          <div class="flex items-center gap-3 rounded-lg px-4 py-3 bg-neutral-800/60">
+            <strong class="text-white">GDPR</strong>
+            <span>Compliance-ready</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="rounded-2xl shadow-2xl overflow-hidden glass">
+          <!-- Mock dashboard card -->
+          <div class="p-6 card-bg">
+            <div class="flex items-start justify-between">
+              <div>
+                <h3 class="text-lg google-sans-semibold text-white">Dashboard overview</h3>
+                <p class="text-sm text-neutral-400">Realtime stock, orders, and alerts.</p>
+              </div>
+              <div class="text-sm text-neutral-400">Live</div>
+            </div>
+
+            <div class="mt-6 grid grid-cols-2 gap-4">
+              <div class="p-4 bg-neutral-800 rounded-lg">
+                <div class="text-xs text-neutral-400">Stock</div>
+                <div class="mt-2 text-2xl google-sans-bold text-white">12,482</div>
+              </div>
+              <div class="p-4 bg-neutral-800 rounded-lg">
+                <div class="text-xs text-neutral-400">Shipments</div>
+                <div class="mt-2 text-2xl google-sans-bold text-white">1,204</div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Features Section -->
-  <section id="features" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 to-slate-800">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl google-sans-bold mb-4">Why Choose Our Platform?</h2>
-        <p class="text-neutral-400 max-w-2xl mx-auto">Experience the power of modern warehouse management with features designed for e-commerce excellence</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-8">
-        <!-- Feature Card 1 -->
-        <div class="feature-card group p-8 bg-slate-800/50 border border-slate-700 rounded-2xl hover:border-emerald-500/50 transition duration-300 cursor-pointer">
-          <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-cyan-500 rounded-lg mb-4 flex items-center justify-center text-xl">⚡</div>
-          <h3 class="text-xl google-sans-bold mb-3">Real-time Tracking</h3>
-          <p class="text-neutral-400">Monitor your inventory and orders in real-time with our advanced tracking system</p>
-        </div>
-
-        <!-- Feature Card 2 -->
-        <div class="feature-card group p-8 bg-slate-800/50 border border-slate-700 rounded-2xl hover:border-emerald-500/50 transition duration-300 cursor-pointer">
-          <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-cyan-500 rounded-lg mb-4 flex items-center justify-center text-xl">🔄</div>
-          <h3 class="text-xl google-sans-bold mb-3">Seamless Integration</h3>
-          <p class="text-neutral-400">Connect with your existing systems effortlessly for a unified workflow</p>
-        </div>
-
-        <!-- Feature Card 3 -->
-        <div class="feature-card group p-8 bg-slate-800/50 border border-slate-700 rounded-2xl hover:border-emerald-500/50 transition duration-300 cursor-pointer">
-          <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-cyan-500 rounded-lg mb-4 flex items-center justify-center text-xl">📊</div>
-          <h3 class="text-xl google-sans-bold mb-3">Advanced Analytics</h3>
-          <p class="text-neutral-400">Get insights into your operations with comprehensive analytics and reporting</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section 1 -->
-  <section class="py-20 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-6xl mx-auto">
-      <div class="bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 border border-emerald-500/30 rounded-3xl p-8 md:p-12 overflow-hidden relative">
-        <div class="absolute inset-0 opacity-10">
-          <div class="absolute top-0 right-0 w-96 h-96 bg-emerald-500 rounded-full blur-3xl"></div>
-        </div>
-        <div class="relative z-10">
-          <h2 class="text-3xl md:text-4xl google-sans-bold mb-6">Effortlessly Simplify Your E-Commerce Fulfillment</h2>
-          <p class="text-neutral-400 text-lg mb-8 max-w-2xl">Reduce operational costs and improve customer satisfaction with our automated fulfillment solutions</p>
-          <button class="px-8 py-3 bg-emerald-500 hover:bg-emerald-600 rounded-lg google-sans-semibold transition duration-300 transform hover:scale-105">
-            Start Your Journey
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services Section -->
-  <section id="services" class="py-20 px-4 sm:px-6 lg:px-8 bg-slate-800">
-    <div class="max-w-7xl mx-auto">
-      <h2 class="text-3xl md:text-4xl google-sans-bold mb-16 text-center">Our Services</h2>
-
-      <!-- Service Items -->
-      <div class="space-y-12">
-        <!-- Service 1 -->
-        <div class="service-item grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <h3 class="text-2xl google-sans-bold mb-4">Warehouse Technology Integration</h3>
-            <p class="text-neutral-400 mb-4">Leverage the latest warehouse management technology to streamline your operations with real-time visibility and control</p>
-            <ul class="space-y-2 text-neutral-400">
-              <li>✓ Automated inventory tracking</li>
-              <li>✓ Smart order routing</li>
-              <li>✓ IoT sensor integration</li>
-            </ul>
-          </div>
-          <div class="service-image bg-gradient-to-br from-slate-700 to-slate-900 rounded-2xl h-72 flex items-center justify-center border border-slate-600">
-            <div class="text-5xl">🏭</div>
-          </div>
-        </div>
-
-        <!-- Service 2 -->
-        <div class="service-item grid md:grid-cols-2 gap-8 items-center md:grid-flow-dense">
-          <div class="service-image bg-gradient-to-br from-slate-700 to-slate-900 rounded-2xl h-72 flex items-center justify-center border border-slate-600">
-            <div class="text-5xl">🚚</div>
-          </div>
-          <div>
-            <h3 class="text-2xl google-sans-bold mb-4">Returns Handling</h3>
-            <p class="text-neutral-400 mb-4">Efficiently manage returns with our comprehensive return management system that improves customer satisfaction</p>
-            <ul class="space-y-2 text-neutral-400">
-              <li>✓ Automated return processing</li>
-              <li>✓ Quality inspections</li>
-              <li>✓ Refund management</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Service 3 -->
-        <div class="service-item grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <h3 class="text-2xl google-sans-bold mb-4">Fast Order Processing</h3>
-            <p class="text-neutral-400 mb-4">Process orders at lightning speed with our optimized workflow system that ensures quick turnaround times</p>
-            <ul class="space-y-2 text-neutral-400">
-              <li>✓ 24/7 order processing</li>
-              <li>✓ Multi-channel support</li>
-              <li>✓ Delivery commitment</li>
-            </ul>
-          </div>
-          <div class="service-image bg-gradient-to-br from-slate-700 to-slate-900 rounded-2xl h-72 flex items-center justify-center border border-slate-600">
-            <div class="text-5xl">⚡</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section 2 -->
-  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900">
-    <div class="max-w-6xl mx-auto">
-      <div class="bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-3xl p-12 text-slate-900">
-        <div class="grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <h2 class="text-3xl md:text-4xl google-sans-bold mb-4">Experience Next-Level Fulfillment</h2>
-            <p class="text-slate-800 mb-6">Transform your warehouse operations with our comprehensive solution</p>
-            <button class="px-8 py-3 bg-slate-900 hover:bg-slate-800 text-emerald-400 rounded-lg google-sans-semibold transition duration-300">
-              Get Started Today
-            </button>
-          </div>
-          <div class="flex items-center justify-center">
-            <div class="text-7xl">📈</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing Section -->
-  <section id="pricing" class="py-20 px-4 sm:px-6 lg:px-8 bg-slate-800">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl google-sans-bold mb-4">Flexible Plans for Every Stage of Growth</h2>
-        <p class="text-neutral-400">Choose the perfect plan that fits your business needs</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-8">
-        <!-- Starter Plan -->
-        <div class="pricing-card p-8 bg-slate-800 border border-slate-700 rounded-2xl hover:border-emerald-500/50 hover:shadow-2xl transition duration-300">
-          <h3 class="text-xl google-sans-bold mb-2">Starter Plan</h3>
-          <div class="text-4xl google-sans-bold mb-4">$99 <span class="text-lg text-neutral-400">/month</span></div>
-          <ul class="space-y-3 mb-8 text-neutral-400">
-            <li>✓ Upto 1000 SKUs</li>
-            <li>✓ Basic Reporting</li>
-            <li>✓ Email Support</li>
-            <li>✗ Advanced Analytics</li>
-          </ul>
-          <button class="w-full py-2 border border-emerald-500 text-emerald-400 rounded-lg hover:bg-emerald-500/10 transition">Get Started</button>
-        </div>
-
-        <!-- Professional Plan -->
-        <div class="pricing-card p-8 bg-gradient-to-br from-slate-700 to-slate-800 border-2 border-emerald-500/50 rounded-2xl shadow-xl">
-          <div class="text-emerald-400 google-sans-semibold mb-2">MOST POPULAR</div>
-          <h3 class="text-xl google-sans-bold mb-2">Professional Plan</h3>
-          <div class="text-4xl google-sans-bold mb-4">$199 <span class="text-lg text-neutral-400">/month</span></div>
-          <ul class="space-y-3 mb-8 text-neutral-400">
-            <li>✓ Upto 10,000 SKUs</li>
-            <li>✓ Advanced Analytics</li>
-            <li>✓ Priority Support</li>
-            <li>✓ API Access</li>
-          </ul>
-          <button class="w-full py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition">Start Free Trial</button>
-        </div>
-
-        <!-- Enterprise Plan -->
-        <div class="pricing-card p-8 bg-slate-800 border border-slate-700 rounded-2xl hover:border-emerald-500/50 hover:shadow-2xl transition duration-300">
-          <h3 class="text-xl google-sans-bold mb-2">Enterprise Plan</h3>
-          <div class="text-4xl google-sans-bold mb-4">$299 <span class="text-lg text-neutral-400">/month</span></div>
-          <ul class="space-y-3 mb-8 text-neutral-400">
-            <li>✓ Unlimited SKUs</li>
-            <li>✓ Custom Integration</li>
-            <li>✓ 24/7 Support</li>
-            <li>✓ Dedicated Account Manager</li>
-          </ul>
-          <button class="w-full py-2 border border-emerald-500 text-emerald-400 rounded-lg hover:bg-emerald-500/10 transition">Contact Sales</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
-  <section id="faq" class="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl md:text-4xl google-sans-bold mb-12 text-center">Frequently Asked Questions</h2>
-
-      <div class="space-y-4">
-        <!-- FAQ Item 1 -->
-        <div class="faq-item bg-slate-800 border border-slate-700 rounded-lg overflow-hidden">
-          <button class="faq-button w-full px-6 py-4 flex justify-between items-center hover:bg-slate-700/50 transition">
-            <span class="text-lg google-sans-semibold">Do you support multiple warehouses?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-content hidden px-6 pb-4 text-neutral-400">
-            Yes, our platform supports unlimited warehouses across different locations, enabling seamless multi-facility operations and inventory synchronization.
-          </div>
-        </div>
-
-        <!-- FAQ Item 2 -->
-        <div class="faq-item bg-slate-800 border border-slate-700 rounded-lg overflow-hidden">
-          <button class="faq-button w-full px-6 py-4 flex justify-between items-center hover:bg-slate-700/50 transition">
-            <span class="text-lg google-sans-semibold">Can I track my orders in real-time?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-content hidden px-6 pb-4 text-neutral-400">
-            Absolutely! Get real-time tracking of all orders from warehouse to customer doorstep with detailed status updates and notifications.
-          </div>
-        </div>
-
-        <!-- FAQ Item 3 -->
-        <div class="faq-item bg-slate-800 border border-slate-700 rounded-lg overflow-hidden">
-          <button class="faq-button w-full px-6 py-4 flex justify-between items-center hover:bg-slate-700/50 transition">
-            <span class="text-lg google-sans-semibold">How does the system handle returns?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-content hidden px-6 pb-4 text-neutral-400">
-            Our automated return management system processes returns efficiently with quality checks, inventory updates, and refund management all in one place.
-          </div>
-        </div>
-
-        <!-- FAQ Item 4 -->
-        <div class="faq-item bg-slate-800 border border-slate-700 rounded-lg overflow-hidden">
-          <button class="faq-button w-full px-6 py-4 flex justify-between items-center hover:bg-slate-700/50 transition">
-            <span class="text-lg google-sans-semibold">What kind of support do you offer?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-content hidden px-6 pb-4 text-neutral-400">
-            We provide 24/7 customer support via email, chat, and phone. Enterprise customers get a dedicated account manager for personalized assistance.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials Section -->
-  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-800 to-slate-900">
-    <div class="max-w-7xl mx-auto">
-      <h2 class="text-3xl md:text-4xl google-sans-bold mb-12 text-center">The Fully Built Client Experience</h2>
-
-      <div class="grid md:grid-cols-3 gap-8">
-        <!-- Testimonial 1 -->
-        <div class="testimonial bg-slate-800/50 border border-slate-700 rounded-2xl p-8 hover:border-emerald-500/30 transition">
-          <div class="flex mb-4">
-            ⭐⭐⭐⭐⭐
-          </div>
-          <p class="text-neutral-400 mb-6">"Warehouse Solutions transformed our fulfillment process. We've seen a 40% improvement in order processing speed."</p>
-          <div class="flex items-center">
-            <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-cyan-500 rounded-full"></div>
-            <div class="ml-3">
-              <p class="google-sans-semibold">Sarah Johnson</p>
-              <p class="text-sm text-neutral-500">CEO, E-Commerce Plus</p>
+            <div class="mt-6">
+              <div class="h-2 bg-neutral-700 rounded-full overflow-hidden">
+                <div class="h-full bg-primary" style="width:72%"></div>
+              </div>
+              <div class="mt-2 text-xs text-neutral-400">Storage used — 72%</div>
             </div>
           </div>
         </div>
-
-        <!-- Testimonial 2 -->
-        <div class="testimonial bg-slate-800/50 border border-slate-700 rounded-2xl p-8 hover:border-emerald-500/30 transition">
-          <div class="flex mb-4">
-            ⭐⭐⭐⭐⭐
-          </div>
-          <p class="text-neutral-400 mb-6">"The integration was seamless, and the ROI was immediate. Highly recommend for any e-commerce business."</p>
-          <div class="flex items-center">
-            <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-cyan-500 rounded-full"></div>
-            <div class="ml-3">
-              <p class="google-sans-semibold">Mike Chen</p>
-              <p class="text-sm text-neutral-500">Founder, Digital Retail Co</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Testimonial 3 -->
-        <div class="testimonial bg-slate-800/50 border border-slate-700 rounded-2xl p-8 hover:border-emerald-500/30 transition">
-          <div class="flex mb-4">
-            ⭐⭐⭐⭐⭐
-          </div>
-          <p class="text-neutral-400 mb-6">"Outstanding support team and powerful features. This is the platform we've been looking for."</p>
-          <div class="flex items-center">
-            <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-cyan-500 rounded-full"></div>
-            <div class="ml-3">
-              <p class="google-sans-semibold">Emma Rodriguez</p>
-              <p class="text-sm text-neutral-500">Operations Manager, Global Shop</p>
-            </div>
-          </div>
-        </div>
+        <!-- Accent circles -->
+        <div class="absolute -right-8 -bottom-10 w-48 h-48 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-3xl"></div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
-  <footer class="bg-slate-950 border-t border-slate-800 py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto">
-      <div class="grid md:grid-cols-4 gap-8 mb-8">
-        <div>
-          <div class="flex items-center space-x-2 mb-4">
-            <div class="w-8 h-8 bg-gradient-to-br from-emerald-400 to-cyan-500 rounded-lg"></div>
-            <span class="google-sans-bold">Warehouse</span>
-          </div>
-          <p class="text-neutral-500 text-sm">Tailored fulfillment solutions for e-commerce success</p>
-        </div>
-
-        <div>
-          <h4 class="google-sans-semibold mb-4">Product</h4>
-          <ul class="space-y-2 text-neutral-500 text-sm">
-            <li><a href="#" class="hover:text-emerald-400 transition">Features</a></li>
-            <li><a href="#" class="hover:text-emerald-400 transition">Pricing</a></li>
-            <li><a href="#" class="hover:text-emerald-400 transition">Security</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="google-sans-semibold mb-4">Company</h4>
-          <ul class="space-y-2 text-neutral-500 text-sm">
-            <li><a href="#" class="hover:text-emerald-400 transition">About</a></li>
-            <li><a href="#" class="hover:text-emerald-400 transition">Blog</a></li>
-            <li><a href="#" class="hover:text-emerald-400 transition">Careers</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="google-sans-semibold mb-4">Contact</h4>
-          <ul class="space-y-2 text-neutral-500 text-sm">
-            <li>Email: info@warehouse.com</li>
-            <li>Phone: +1 (555) 123-4567</li>
-            <li>Address: 123 Commerce St</li>
-          </ul>
-        </div>
+    <!-- FEATURES -->
+    <section id="features" class="max-w-7xl mx-auto px-6 py-16">
+      <div class="text-center mb-12">
+        <h2 class="text-2xl google-sans-bold text-white">Built for modern teams</h2>
+        <p class="text-neutral-400 mt-2">Inventory control, user management, and integrations with the tools you already use.</p>
       </div>
 
-      <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-neutral-500 text-sm">
-        <p>&copy; 2024 Warehouse Solutions. All rights reserved.</p>
-        <div class="flex space-x-6 mt-4 md:mt-0">
-          <a href="#" class="hover:text-emerald-400 transition">Privacy Policy</a>
-          <a href="#" class="hover:text-emerald-400 transition">Terms of Service</a>
-          <a href="#" class="hover:text-emerald-400 transition">Contact Us</a>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="p-6 rounded-xl shadow bg-neutral-800/40 border border-[#323232]">
+          <h3 class="google-sans-semibold text-white">Inventory & Stock</h3>
+          <p class="text-sm text-neutral-400 mt-2">Track quantities, set reorder thresholds, and get low-stock alerts.</p>
+        </div>
+        <div class="p-6 rounded-xl shadow bg-neutral-800/40 border border-[#323232]">
+          <h3 class="google-sans-semibold text-white">Orders & Shipments</h3>
+          <p class="text-sm text-neutral-400 mt-2">Manage outbound and inbound shipments with proofs and statuses.</p>
+        </div>
+        <div class="p-6 rounded-xl shadow bg-neutral-800/40 border border-[#323232]">
+          <h3 class="google-sans-semibold text-white">User Roles & Audit</h3>
+          <p class="text-sm text-neutral-400 mt-2">Admin and staff roles, activity logs, and secure admin confirmations.</p>
+        </div>
+        <div class="p-6 rounded-xl shadow bg-neutral-800/40 border border-[#323232]">
+          <h3 class="google-sans-semibold text-white">CSV Import & Export</h3>
+          <p class="text-sm text-neutral-400 mt-2">Bulk upload and export inventories and reports.</p>
+        </div>
+        <div class="p-6 rounded-xl shadow bg-neutral-800/40 border border-[#323232]">
+          <h3 class="google-sans-semibold text-white">Integrations</h3>
+          <p class="text-sm text-neutral-400 mt-2">Connect with accounting, shipping providers, and BI tools.</p>
+        </div>
+        <div class="p-6 rounded-xl shadow bg-neutral-800/40 border border-[#323232]">
+          <h3 class="google-sans-semibold text-white">Secure & Compliant</h3>
+          <p class="text-sm text-neutral-400 mt-2">Role checks, prepared statements, and configurable retention policies.</p>
         </div>
       </div>
-    </div>
-  </footer>
+    </section>
 
-  <!-- Scripts -->
-  <script src="./js/landing-animations.js"></script>
+    <!-- ARTICLES -->
+    <section id="articles" class="max-w-7xl mx-auto px-6 py-12">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl google-sans-bold text-white">Articles & Resources</h2>
+        <p class="text-neutral-400 mt-2">Guides and best practices for managing warehouses and inventory.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="p-6 bg-neutral-800/40 rounded-xl shadow border border-[#323232]">
+          <h3 class="google-sans-semibold text-white">Getting started with Warehouse W</h3>
+          <p class="text-neutral-400 text-sm mt-2">Set up your first warehouse, import inventory, and invite team members.</p>
+          <a href="#" class="mt-4 inline-block text-primary">Read more →</a>
+        </article>
+        <article class="p-6 bg-neutral-800/40 rounded-xl shadow border border-[#323232]">
+          <h3 class="google-sans-semibold text-white">Inventory best practices</h3>
+          <p class="text-neutral-400 text-sm mt-2">Tips for stock rotation, reorder points, and minimizing shrinkage.</p>
+          <a href="#" class="mt-4 inline-block text-primary">Read more →</a>
+        </article>
+        <article class="p-6 bg-neutral-800/40 rounded-xl shadow border border-[#323232]">
+          <h3 class="google-sans-semibold text-white">Secure admin workflows</h3>
+          <p class="text-neutral-400 text-sm mt-2">Implementing confirmations, audits, and role separation.</p>
+          <a href="#" class="mt-4 inline-block text-primary">Read more →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- INTEGRATIONS -->
+    <section id="integrations" class="max-w-7xl mx-auto px-6 py-12">
+      <div class="bg-neutral-800/40 rounded-xl p-6 shadow flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+          <h3 class="text-lg google-sans-semibold text-white">Connect to the tools you use</h3>
+          <p class="text-neutral-400 mt-1">Quickly export data or connect programmatically using prepared APIs.</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" class="h-8 opacity-80" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" class="h-8 opacity-80" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS" class="h-8 opacity-80" />
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="max-w-7xl mx-auto px-6 py-12">
+      <div class="grid md:grid-cols-2 gap-6 items-center">
+        <div>
+          <h3 class="text-2xl google-sans-bold text-white">Contact us</h3>
+          <p class="text-neutral-400 mt-2">Have questions or need a demo? Send a message and our team will reach out within one business day.</p>
+
+          <div class="mt-6 text-sm text-neutral-400">
+            <div><strong>Email:</strong> <a href="mailto:hello@warehouse.local" class="text-primary">hello@warehouse.local</a></div>
+            <div class="mt-2"><strong>Phone:</strong> <span class="text-neutral-300">+62 812-3456-7890</span></div>
+          </div>
+        </div>
+        <form id="contact-form" class="space-y-4 bg-neutral-800/40 p-6 rounded-xl shadow">
+          <div>
+            <label class="text-sm text-neutral-300">Name</label>
+            <input name="name" required class="w-full mt-1 p-2 rounded border border-neutral-700 text-neutral-100" />
+          </div>
+          <div>
+            <label class="text-sm text-neutral-300">Email</label>
+            <input name="email" type="email" required class="w-full mt-1 p-2 rounded border border-neutral-700 text-neutral-100" />
+          </div>
+          <div>
+            <label class="text-sm text-neutral-300">Message</label>
+            <textarea name="message" rows="4" required class="w-full mt-1 p-2 rounded border border-neutral-700 text-neutral-100"></textarea>
+          </div>
+          <div class="flex items-center justify-between">
+            <button type="submit" class="px-4 py-1.5 bg-accent border border-primary text-neutral-100 rounded">Send message</button>
+            <div id="contact-status" class="text-sm text-neutral-400"></div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- PRICING / CTA -->
+    <section id="pricing" class="max-w-7xl mx-auto px-6 py-12">
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-xl shadow bg-neutral-800/40 border border-[#323232]">
+          <h4 class="google-sans-semibold text-white">Free</h4>
+          <div class="mt-4 text-3xl google-sans-bold text-white">$0</div>
+          <p class="text-sm text-neutral-400 mt-2">Single warehouse, basic reports, community support.</p>
+          <a href="auth/simple_register.php" class="mt-6 inline-block px-4 py-1.5 bg-accent border border-primary text-neutral-100 rounded">Start free</a>
+        </div>
+        <div class="p-6 rounded-xl shadow bg-neutral-800/40 border border-[#323232]">
+          <h4 class="google-sans-semibold text-white">Team</h4>
+          <div class="mt-4 text-3xl google-sans-bold text-white">$29<span class="text-sm google-sans-medium">/mo</span></div>
+          <p class="text-sm text-neutral-400 mt-2">Multi-user, integrations, and priority support.</p>
+          <a href="#" class="mt-6 inline-block px-4 py-1.5 border border-[#323232] rounded text-neutral-200">Contact sales</a>
+        </div>
+        <div class="p-6 rounded-xl shadow bg-neutral-800/40 border border-[#323232]">
+          <h4 class="google-sans-semibold text-white">Enterprise</h4>
+          <div class="mt-4 text-3xl google-sans-bold text-white">Custom</div>
+          <p class="text-sm text-neutral-400 mt-2">SLA, dedicated support, on-prem options.</p>
+          <a href="#" class="mt-6 inline-block px-4 py-1.5 border border-[#323232] rounded text-neutral-200">Contact sales</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="mt-12 border-t border-neutral-800">
+      <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="text-sm text-neutral-400">© "Warehouse" — Built with PHP, MySQL, and Tailwind</div>
+        <div class="flex items-center gap-4 text-sm text-neutral-400">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="pages/dashboard.php">Dashboard</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    navToggle && navToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Hero entrance animation using GSAP when available
+    window.addEventListener('load', () => {
+      if (window.gsap) {
+        gsap.from('h1', {
+          y: 20,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power3.out'
+        });
+        gsap.from('main > section div p', {
+          y: 8,
+          opacity: 0,
+          duration: 0.8,
+          delay: 0.1
+        });
+        gsap.from('.glass', {
+          scale: 0.98,
+          opacity: 0,
+          duration: 0.9,
+          delay: 0.15
+        });
+      }
+    });
+
+    // Contact form (AJAX placeholder)
+    const contactForm = document.getElementById('contact-form');
+    const contactStatus = document.getElementById('contact-status');
+    contactForm && contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      contactStatus.textContent = 'Sending…';
+      const form = new FormData(contactForm);
+      try {
+        // Try sending to a backend endpoint if available
+        const res = await fetch('auth/contact.php', {
+          method: 'POST',
+          body: form
+        });
+        if (res.ok) {
+          contactStatus.textContent = 'Message sent — thanks!';
+          contactForm.reset();
+        } else {
+          contactStatus.textContent = 'Unable to send. Please email hello@warehouse.local';
+        }
+      } catch (err) {
+        contactStatus.textContent = 'Unable to send. Please email hello@warehouse.local';
+      }
+    });
+
+    // Small progressive enhancement: prefers-reduced-motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('[style*="transition"]').forEach(el => el.style.transition = 'none');
+    }
+  </script>
 </body>
 
 </html>
