@@ -101,9 +101,9 @@
         <span class="google-sans-semibold text-lg">Warehouse</span>
       </a>
       <nav class="hidden md:flex items-center gap-6">
+        <a href="./index.php" class="text-neutral-300 hover:text-white">Home</a>
+        <a href="./articles.php" class="text-neutral-300 hover:text-white">Articles</a>
         <a href="#features" class="text-neutral-300 hover:text-white">Features</a>
-        <a href="#articles" class="text-neutral-300 hover:text-white">Articles</a>
-        <a href="#integrations" class="text-neutral-300 hover:text-white">Integrations</a>
         <a href="#pricing" class="text-neutral-300 hover:text-white">Pricing</a>
         <div class="flex items-center gap-1.5">
           <a href="auth/simple_login.php" class="px-4 py-1.5 rounded-md bg-[#242424] border border-[#323232] hover:bg-neutral-800">Login</a>
